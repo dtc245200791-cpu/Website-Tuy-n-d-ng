@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  # 1. Prometheus Server Self-Monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # 2. Web App Monitoring (Node.js Express Metrics)
+  - job_name: 'jobboard-app'
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['app:3000']
+        labels:
+          service: 'jobboard-web'
+          environment: 'production'
+
+  # 3. Database Monitoring (MySQL Exporter)
+  - job_name: 'mysql'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['mysqld-exporter:9104']
+        labels:
+          service: 'mysql-database'
+
+  # 4. Container Monitoring (cAdvisor)
+  - job_name: 'cadvisor'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          service: 'container-metrics'

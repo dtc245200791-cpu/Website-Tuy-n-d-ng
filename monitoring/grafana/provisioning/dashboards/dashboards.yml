@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: 'JobBoard Dashboards'
+    orgId: 1
+    folder: 'Job Board System'
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /etc/grafana/dashboards

@@ -83,6 +83,60 @@ services:
     depends_on:
       - app
 
+  # 5. MySQL Exporter (Thu thập số liệu CSDL cho Prometheus)
+  mysqld-exporter:
+    image: prom/mysqld-exporter:v0.15.1
+    container_name: jobboard_mysqld_exporter
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: "${DB_USER:-jobboard_user}:${DB_PASSWORD:-JobBoardSecure_2026!@#}(mysql:3306)/"
+    networks:
+      - app_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # 6. Prometheus (Thu thập và lưu trữ Metrics hệ thống)
+  prometheus:
+    image: prom/prometheus:v2.50.0
+    container_name: jobboard_prometheus
+    restart: always
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - app_network
+    depends_on:
+      - app
+      - mysqld-exporter
+
+  # 7. Grafana (Hiển thị biểu đồ giám sát Dashboard trực quan)
+  grafana:
+    image: grafana/grafana:10.3.3
+    container_name: jobboard_grafana
+    restart: always
+    ports:
+      - "${GRAFANA_PORT:-3001}:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-AdminSecure_2026!@#}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/etc/grafana/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    networks:
+      - app_network
+    depends_on:
+      - prometheus
+
 networks:
   app_network:
     driver: bridge
@@ -90,3 +144,5 @@ networks:
 volumes:
   mysql_data:
   nginx_logs:
+  prometheus_data:
+  grafana_data:

@@ -20,16 +20,23 @@ Website Tuyển dụng (Job Board) là nền tảng kết nối ứng viên và 
 | Mốc Commit | Nội dung thực hiện | Trạng thái |
 |:---:|---|:---:|
 | **Commit 1** | Triển khai Ứng dụng Web Job Board, MySQL 8.0, phpMyAdmin, Nginx Reverse Proxy (HTTPS tự ký + Security Headers) | **Hoàn thành** |
-| **Commit 2** | Tích hợp hệ thống giám sát Prometheus + Grafana (Container, Web App, MySQL) | *Đang cập nhật* |
+| **Commit 2** | Tích hợp hệ thống giám sát Prometheus + Grafana (Container, Web App, MySQL Exporter) | **Hoàn thành** |
 | **Commit 3** | Tích hợp hệ thống log tập trung Loki + Promtail (LogQL) và Hardening hệ thống | *Đang cập nhật* |
 
 ---
 
-## 3. Kiến trúc hệ thống (Commit 1)
-* **Web Application:** Node.js (Express), Bootstrap/Custom UI, Multer upload CV, tự động migrate & seed database.
-* **Database:** MySQL 8.0 lưu trữ thông tin công ty, danh mục, tin tuyển dụng và hồ sơ ứng tuyển.
-* **Quản trị Database:** phpMyAdmin chạy ở cổng 8080.
-* **Reverse Proxy:** Nginx 1.25 Alpine hỗ trợ HTTP (cổng 80) và HTTPS (cổng 443 với chứng chỉ SSL tự ký), cấu hình đầy đủ các HTTP Security Headers (X-Frame-Options, X-Content-Type-Options, CSP, HSTS...).
+## 3. Kiến trúc Hệ thống Giám sát (Commit 2)
+1. **Prometheus Server (Port 9090):**
+   * Tự động thu thập (scrape) định kỳ 5s một lần các thông số hệ thống.
+   * Scrape Web Application metrics qua endpoint `/metrics` (`prom-client`).
+   * Scrape MySQL metrics qua `mysqld-exporter` (queries, connections, buffer pool...).
+2. **Grafana Dashboard (Port 3001):**
+   * Tự động cấu hình Datasource Prometheus (`provisioning/datasources`).
+   * Tự động nạp Dashboard giám sát tổng thể: **Job Board System Overview - DT33** (`provisioning/dashboards`).
+   * Các chỉ số hiển thị:
+     * Request Rate (req/s), Latency trung bình (s), Tỷ lệ lỗi HTTP Status.
+     * Số lượng tin tuyển dụng active, số lượng ứng viên nộp hồ sơ.
+     * Số kết nối MySQL hiện hành, số câu truy vấn MySQL/giây (QPS).
 
 ---
 
@@ -52,5 +59,7 @@ docker compose up -d --build
 * **Website Tuyển dụng (HTTP):** [http://localhost](http://localhost)
 * **Website Tuyển dụng (HTTPS):** [https://localhost](https://localhost)
 * **Quản trị CSDL (phpMyAdmin):** [http://localhost:8080](http://localhost:8080)
-  * *Tên đăng nhập:* `jobboard_user` (hoặc `root`)
-  * *Mật khẩu:* `JobBoardSecure_2026!@#` (hoặc `RootAdminSecure_2026!@#`)
+  * *Tài khoản:* `jobboard_user` / `JobBoardSecure_2026!@#`
+* **Prometheus Server:** [http://localhost:9090](http://localhost:9090)
+* **Grafana Dashboard:** [http://localhost:3001](http://localhost:3001)
+  * *Tài khoản Grafana:* `admin` / `AdminSecure_2026!@#`
