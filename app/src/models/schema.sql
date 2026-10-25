@@ -104,4 +104,4 @@ INSERT IGNORE INTO jobs (id, title, company_id, category_id, location, job_type,
 
 INSERT IGNORE INTO applications (id, job_id, full_name, email, phone, cover_letter, cv_filename, cv_filepath, status) VALUES
 (1, 1, 'Nguyen Nhu Thanh', 'dtc245200791@ictu.edu.vn', '0987654321', 'Em co kinh nghiem trien khai he thong Docker Compose, Nginx, Prometheus va Grafana...', 'CV_NguyenNhuThanh_DevOps.pdf', '/uploads/sample_cv_1.pdf', 'interviewed'),
-(2, 2, 'Tran Van Minh', 'tranvanminh.dev@gmail.com', '0912345678', 'Toi da tung tham gia phat trien du an he thong Backend Node.js ket noi MySQL 2 nam...', 'CV_TranVanMinh_Backend.pdf', '/uploads/sample_cv_2.pdf', 'reviewing');
+(2, 2, 'Nguyen Van A', 'nguyenvana@gmail.com', '0912345678', 'Toi da tung tham gia phat trien du an he thong Backend Node.js ket noi MySQL 2 nam...', 'CV_NguyenVanA_Backend.pdf', '/uploads/sample_cv_2.pdf', 'reviewing');

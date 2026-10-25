@@ -80,15 +80,15 @@ Hệ thống bao gồm **8 container dịch vụ** hoạt động đồng bộ:
 
 | Dịch vụ | URL Truy cập | Tài khoản / Mật khẩu |
 |:---|:---|:---|
-| **Website Tuyển dụng (HTTP)** | [http://localhost](http://localhost) | Khách / Ứng viên |
+| **Website Tuyển dụng (HTTP)** | [http://localhost:8088](http://localhost:8088) | Khách / Ứng viên |
 | **Website Tuyển dụng (HTTPS)** | [https://localhost](https://localhost) | Tự động mã hóa TLS |
-| **Quản trị Tuyển dụng & CV** | [http://localhost/admin.html](http://localhost/admin.html) | Quản trị viên nhân sự |
-| **Đăng tin Tuyển dụng mới** | [http://localhost/post-job.html](http://localhost/post-job.html) | Nhà tuyển dụng |
+| **Quản trị Tuyển dụng & CV** | [http://localhost:8088/admin.html](http://localhost:8088/admin.html) | Quản trị viên nhân sự |
+| **Đăng tin Tuyển dụng mới** | [http://localhost:8088/post-job.html](http://localhost:8088/post-job.html) | Nhà tuyển dụng |
 | **Quản trị CSDL (phpMyAdmin)** | [http://localhost:8080](http://localhost:8080) | `jobboard_user` / `JobBoardSecure_2026!@#` |
 | **Prometheus Metrics Engine** | [http://localhost:9090](http://localhost:9090) | Quản trị viên hệ thống |
 | **Grafana Dashboard** | [http://localhost:3001](http://localhost:3001) | `admin` / `AdminSecure_2026!@#` |
-| **Endpoint Sức khỏe (Health)** | [http://localhost/health](http://localhost/health) | Trạng thái container |
-| **Endpoint Metrics ứng dụng** | [http://localhost/metrics](http://localhost/metrics) | prom-client xuất số liệu |
+| **Endpoint Sức khỏe (Health)** | [http://localhost:8088/health](http://localhost:8088/health) | Trạng thái container |
+| **Endpoint Metrics ứng dụng** | [http://localhost:8088/metrics](http://localhost:8088/metrics) | prom-client xuất số liệu |
 
 ---
 

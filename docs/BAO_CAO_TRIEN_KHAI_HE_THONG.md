@@ -318,15 +318,15 @@ Hệ thống áp dụng đầy đủ 5 trụ cột Hardening theo nguyên tắc 
 
 | Tên Dịch Vụ | Địa chỉ truy cập | Tài khoản / Thông tin xác thực |
 |:---|:---|:---|
-| **Website Tuyển dụng (HTTP)** | `http://localhost` | Khách truy cập / Ứng viên |
+| **Website Tuyển dụng (HTTP)** | `http://localhost:8088` | Khách truy cập / Ứng viên |
 | **Website Tuyển dụng (HTTPS)** | `https://localhost` | Tự động kích hoạt SSL/TLS |
-| **Trang Quản lý Tuyển dụng** | `http://localhost/admin.html` | Cổng xét duyệt hồ sơ ứng viên |
-| **Trang Đăng tin tuyển dụng** | `http://localhost/post-job.html` | Cổng dành cho doanh nghiệp |
+| **Trang Quản lý Tuyển dụng** | `http://localhost:8088/admin.html` | Cổng xét duyệt hồ sơ ứng viên |
+| **Trang Đăng tin tuyển dụng** | `http://localhost:8088/post-job.html` | Cổng dành cho doanh nghiệp |
 | **Quản trị CSDL (phpMyAdmin)** | `http://localhost:8080` | `jobboard_user` / `JobBoardSecure_2026!@#` |
 | **Prometheus Metrics Engine** | `http://localhost:9090` | Quản trị viên hệ thống |
 | **Grafana Dashboard** | `http://localhost:3001` | `admin` / `AdminSecure_2026!@#` |
-| **App Healthcheck Endpoint** | `http://localhost/health` | Kiểm tra trạng thái máy chủ Web |
-| **App Prometheus Metrics** | `http://localhost/metrics` | Định dạng Prometheus chuẩn |
+| **App Healthcheck Endpoint** | `http://localhost:8088/health` | Kiểm tra trạng thái máy chủ Web |
+| **App Prometheus Metrics** | `http://localhost:8088/metrics` | Định dạng Prometheus chuẩn |
 
 ### 4.4 Kịch bản Demo thực nghiệm chi tiết cho buổi bảo vệ
 * **Kịch bản 1: Demo Ứng viên tìm việc & Nộp CV**
@@ -336,7 +336,7 @@ Hệ thống áp dụng đầy đủ 5 trụ cột Hardening theo nguyên tắc 
   4. Điền họ tên "Nguyễn Như Thành", email, số điện thoại, đính kèm file CV PDF và bấm **"Xác nhận Nộp hồ sơ ngay"**.
   5. Hệ thống hiển thị thông báo thành công.
 * **Kịch bản 2: Demo Nhà tuyển dụng xét duyệt ứng viên**
-  1. Truy cập trang `http://localhost/admin.html`.
+  1. Truy cập trang `http://localhost:8088/admin.html`.
   2. Bảng hiển thị ngay hồ sơ vừa nộp với trạng thái ban đầu là "Chờ duyệt".
   3. Bấm nút **"Xem CV"** để tải và xem trực tiếp tệp CV mà ứng viên vừa gửi.
   4. Thay đổi trạng thái hồ sơ sang "Mời phỏng vấn" hoặc "Trúng tuyển" $\rightarrow$ CSDL MySQL lập tức cập nhật.
