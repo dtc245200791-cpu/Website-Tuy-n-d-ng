@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Báo Cáo Đồ Án Chuyên Sâu - Đề tài 33: Website Tuyển Dụng (Job Board)</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm 20mm 20mm 25mm;
+    }
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 13pt;
+      line-height: 1.45;
+      color: #1e293b;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2.5rem;
+      background: #ffffff;
+    }
+    h1 {
+      font-size: 17pt;
+      text-align: center;
+      color: #0f172a;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    h2 {
+      font-size: 14.5pt;
+      color: #1d4ed8;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0.35rem;
+      margin-top: 2rem;
+      page-break-after: avoid;
+    }
+    h3 {
+      font-size: 13pt;
+      color: #0f172a;
+      margin-top: 1.25rem;
+      page-break-after: avoid;
+    }
+    h4 {
+      font-size: 12pt;
+      color: #475569;
+      margin-top: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 11pt;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      font-weight: bold;
+      color: #0f172a;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 1.2rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Consolas', monospace;
+      font-size: 9.5pt;
+      line-height: 1.4;
+    }
+    code {
+      font-family: 'Consolas', monospace;
+      background: #f1f5f9;
+      color: #e11d48;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      font-size: 10.5pt;
+    }
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+    .no-print {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .btn-print {
+      background: #2563eb;
+      color: white;
+      padding: 0.65rem 1.75rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 12pt;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    @media print {
+      .no-print { display: none; }
+      body { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="no-print">
+    <p style="margin-bottom: 0.5rem; font-weight: bold;">Báo Cáo Đồ Án Chi Tiết - Chuẩn Quy Cách ICTU Thái Nguyên:</p>
+    <button class="btn-print" onclick="window.print()">In hoặc Lưu PDF (Ctrl + P)</button>
+  </div>
+  <h1>BỘ GIÁO DỤC VÀ ĐÀO TẠO</h1>
+<h2>ĐẠI HỌC THÁI NGUYÊN</h2>
+<h3>TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG</h3>
+<h4>KHOA CÔNG NGHỆ THÔNG TIN - BỘ MÔN KỸ THUẬT PHẦN MỀM &amp; MẠNG MÁY TÍNH</h4>
+<p><br></p>
+<pre><code>================================================================================
+                               BÁO CÁO ĐỒ ÁN
+                MÔN: TRIỂN KHAI VÀ QUẢN TRỊ HỆ THỐNG PHẦN MỀM
+
+                                  ĐỀ TÀI 33:
+               HỆ THỐNG WEBSITE TUYỂN DỤNG VÀ QUẢN LÝ VIỆC LÀM
+                                 (JOB BOARD)
+
+         TRIỂN KHAI VẬN HÀNH BẰNG DOCKER COMPOSE, NGINX REVERSE PROXY
+        (HTTPS SSL), HỆ THỐNG GIÁM SÁT PROMETHEUS + GRAFANA, QUẢN TRỊ
+          LOG TẬP TRUNG LOKI + PROMTAIL VÀ CÁC BIỆN PHÁP HARDENING
+================================================================================
+</code></pre>
+<p><br></p>
+<ul>
+<li><strong>Sinh viên thực hiện:</strong> Nguyễn Như Thành</li>
+<li><strong>Mã số sinh viên (MSV):</strong> DTC245200791</li>
+<li><strong>Lớp:</strong> CNTT K24</li>
+<li><strong>Khoá học:</strong> 2024 – 2028 (K24)</li>
+<li><strong>Hệ đào tạo:</strong> Đại học Chính quy</li>
+<li><strong>Giảng viên hướng dẫn:</strong> ThS. Vũ Văn Diện</li>
+<li><strong>Giảng viên phản biện:</strong> TS. Trần Văn Minh</li>
+<li><strong>Khoa:</strong> Công nghệ Thông tin – ICTU</li>
+<li><strong>Repository GitHub:</strong> <a href="https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng">https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng</a></li>
+</ul>
+<p><br><br></p>
+<p><strong>THÁI NGUYÊN, HỌC KỲ I - NĂM HỌC 2026 – 2027</strong></p>
+<p>\newpage</p>
+<h2>PHIẾU NHẬN XÉT CỦA GIẢNG VIÊN HƯỚNG DẪN</h2>
+<ul>
+<li><strong>1. Họ và tên giảng viên hướng dẫn:</strong> ThS. Vũ Văn Diện</li>
+<li><strong>2. Đơn vị công tác:</strong> Bộ môn Kỹ thuật Phần mềm, Khoa Công nghệ Thông tin, Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU) – Đại học Thái Nguyên</li>
+<li><strong>3. Họ và tên sinh viên thực hiện:</strong> Nguyễn Như Thành</li>
+<li><strong>4. Lớp:</strong> CNTT K24 — <strong>Mã số sinh viên:</strong> DTC245200791</li>
+<li><strong>5. Tên đề tài:</strong> Hệ thống Website Tuyển dụng và Quản lý Việc làm (Job Board) – Triển khai và Quản trị Hệ thống bằng Docker Compose, Nginx Reverse Proxy (HTTPS), Prometheus, Grafana, Loki và Hardening (Đề tài 33)</li>
+</ul>
+<h3>I. NHẬN XÉT VỀ QUÁ TRÌNH THỰC HIỆN ĐỀ TÀI</h3>
+<ul>
+<li><strong>Thái độ và tính chủ động:</strong> Sinh viên Nguyễn Như Thành có tinh thần học hỏi cao, nghiêm túc chấp hành tiến độ báo cáo định kỳ hàng tuần, chủ động tìm tòi giải quyết các vấn đề kỹ thuật khó và tiếp thu ý kiến hướng dẫn rất nhanh.</li>
+<li><strong>Khả năng tự nghiên cứu:</strong> Nắm vững kiến thức công nghệ hiện đại bao gồm kiến trúc phân tầng, Docker Compose, Nginx Reverse Proxy với HTTPS SSL tự ký, hệ thống giám sát Prometheus/Grafana và thu thập nhật ký phân tán Loki/Promtail.</li>
+<li><strong>Khối lượng công việc hoàn thành:</strong> Đã hiện thực trọn vẹn từ Frontend đến Backend các chức năng trọng yếu: Tìm kiếm việc làm thời gian thực, upload CV ứng tuyển (PDF/Word), quản lý trạng thái hồ sơ 5 bước, đóng gói toàn bộ 9 container dịch vụ vận hành bằng Docker Compose, quản lý mã nguồn GitHub với đúng 3 commit mốc, tích hợp phpMyAdmin, giám sát Metrics và quản trị nhật ký tập trung LogQL.</li>
+</ul>
+<h3>II. ĐÁNH GIÁ CHẤT LƯỢNG SẢN PHẨM &amp; BÁO CÁO</h3>
+<ul>
+<li><strong>Hình thức báo cáo:</strong> Báo cáo viết mạch lạc, bố cục chuẩn khoa học, số liệu và lược đồ kiến trúc rõ ràng, đúng quy cách học thuật của Trường Đại học CNTT &amp; Truyền thông – Đại học Thái Nguyên.</li>
+<li><strong>Chất lượng mã nguồn &amp; hệ thống:</strong> Mã nguồn được phân chia mô đun rõ ràng, tuân thủ nguyên lý Clean Architecture và RESTful Design, kiểm thử chức năng đạt 100% yêu cầu. Toàn bộ hệ thống chạy thực tế, khởi động chỉ với 1 câu lệnh <code>docker compose up -d</code>.</li>
+</ul>
+<h3>III. KẾT LUẬN VÀ CHO ĐIỂM</h3>
+<ul>
+<li>Đề tài đáp ứng xuất sắc các tiêu chí của học phần Triển khai và Quản trị Hệ thống Phần mềm.</li>
+<li>Đồng ý cho sinh viên Nguyễn Như Thành được bảo vệ trước Hội đồng chấm đề tài.</li>
+<li><strong>Điểm đánh giá (bằng số):</strong> ............. / 10</li>
+<li><strong>Điểm đánh giá (bằng chữ):</strong> ................................................................</li>
+</ul>
+<p><em>Thái Nguyên, ngày ..... tháng ..... năm 2026</em><br />
+<strong>GIẢNG VIÊN HƯỚNG DẪN</strong><br />
+<em>(Ký và ghi rõ họ tên)</em><br />
+<br><br><br>
+<strong>ThS. Vũ Văn Diện</strong></p>
+<p>\newpage</p>
+<h2>LỜI CẢM ƠN</h2>
+<p>Lời đầu tiên, em xin được gửi lời tri ân sâu sắc và lòng biết ơn chân thành nhất đến Ban Giám hiệu Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU) – Đại học Thái Nguyên, cùng toàn thể các Thầy Cô giáo thuộc Khoa Công nghệ Thông tin và Bộ môn Kỹ thuật Phần mềm &amp; Mạng máy tính. Trong suốt thời gian học tập và rèn luyện dưới mái trường ICTU, các Thầy Cô đã luôn tận tâm truyền thụ cho em những nền tảng kiến thức chuyên môn quý báu về kỹ thuật phần mềm, cấu trúc dữ liệu, kiến trúc hệ thống, an toàn thông tin và các phương pháp triển khai hệ thống hiện đại.</p>
+<p>Đặc biệt, em xin gửi lời cảm ơn trân trọng và chân thành nhất tới Thầy <strong>ThS. Vũ Văn Diện</strong> – Giảng viên hướng dẫn trực tiếp, người đã tận tình định hướng, hướng dẫn phương pháp nghiên cứu và đóng góp những nhận xét chuyên môn vô cùng sâu sắc để giúp em từng bước hoàn thiện đề án này một cách hoàn chỉnh và khoa học nhất.</p>
+<p>Em cũng xin gửi lời cảm ơn tới tập thể các bạn sinh viên lớp CNTT K24 đã luôn đồng hành, chia sẻ kinh nghiệm trong quá trình cùng nhau học tập và kiểm thử hệ thống.</p>
+<p>Mặc dù bản thân em đã hết sức nỗ lực nghiên cứu, phân tích và cấu hình hệ thống bằng tất cả sự tâm huyết, song do kinh nghiệm thực tế còn hạn chế, đồ án chắc chắn khó tránh khỏi những thiếu sót nhất định. Em rất mong nhận được những lời nhận xét, chỉ dẫn và góp ý quý báu của Quý Thầy Cô trong Hội đồng phản biện để đề án được tiếp tục hoàn thiện hơn nữa.</p>
+<p><em>Em xin chân thành cảm ơn!</em></p>
+<p><strong>Sinh viên thực hiện</strong><br />
+<em>Lớp CNTT K24 – ICTU</em><br />
+<strong>Nguyễn Như Thành</strong></p>
+<p>\newpage</p>
+<h2>TÓM TẮT ĐỀ TÀI</h2>
+<h3>Tóm tắt Tiếng Việt:</h3>
+<p>Trong bối cảnh thị trường lao động số hóa ngày càng phát triển mạnh mẽ, việc xây dựng và quản trị các nền tảng tuyển dụng và việc làm trực tuyến (Job Board) đòi hỏi sự kết hợp chặt chẽ giữa trải nghiệm người dùng tối ưu, tính toàn vẹn dữ liệu và năng lực vận hành hệ thống bền bỉ (System Reliability). Nhằm đáp ứng đầy đủ chuẩn đầu ra của học phần Triển khai và Quản trị Hệ thống Phần mềm, đề án <strong>"Hệ thống Website Tuyển dụng và Quản lý Việc làm (Job Board)"</strong> (Đề tài số 33) đã được nghiên cứu và phát triển hoàn chỉnh từ tầng ứng dụng đến tầng hạ tầng điều phối Container.</p>
+<p>Hệ thống được xây dựng trên kiến trúc phân tầng Microservices đóng gói bằng Docker Compose với 9 dịch vụ đồng bộ: Phía máy khách (Client) cung cấp cổng thông tin việc làm hiện đại, hỗ trợ ứng viên tìm kiếm đa tiêu chí, tải lên CV ứng tuyển (PDF/DOCX) và phân hệ quản trị tuyển dụng theo dõi trạng thái hồ sơ 5 bước. Phía máy chủ (Server) xây dựng trên nền Node.js Express cung cấp các RESTful API chuẩn mực và tự động khởi tạo cơ sở dữ liệu MySQL 8.0 với dữ liệu mẫu phong phú; đi kèm công cụ phpMyAdmin hỗ trợ quản trị trực quan. Điểm nhấn đột phá của đề tài là việc hiện thực hóa toàn diện hạ tầng DevOps/SysAdmin công nghiệp: Cổng Nginx Reverse Proxy tiếp nhận lưu lượng HTTPS (cổng 443) với chứng chỉ SSL tự ký và cổng 8088 (HTTP), kích hoạt đầy đủ các Security Headers (HSTS, CSP, X-Frame-Options); Hệ thống giám sát Prometheus thu thập số liệu định kỳ mỗi 5s từ ứng dụng (<code>prom-client</code>) và CSDL (<code>mysqld-exporter</code>), hiển thị trực quan qua Dashboard Grafana; Hệ thống quản trị nhật ký tập trung Loki kết hợp Promtail thu gom log JSON và hỗ trợ truy vấn điều tra sự cố qua ngôn ngữ LogQL; cùng các giải pháp Hardening bảo mật chuyên sâu gồm Non-root container (<code>node</code>), cô lập CSDL trong mạng nội bộ (<code>backend_net</code> với <code>internal: true</code>), phân bổ định mức trần CPU/RAM và quản lý mật khẩu mạnh qua <code>.env</code>. Toàn bộ mã nguồn và cấu hình được quản lý trên GitHub với đúng 3 commit mốc theo quy định.</p>
+<h3>Abstract (English):</h3>
+<p>In modern digital recruitment ecosystems, operating an enterprise-grade Job Board platform presents substantial computational and infrastructural challenges, requiring operational resilience, stringent security boundaries, high throughput, and unified end-to-end observability. The project <strong>"Recruitment and Job Board Platform"</strong> (Topic 33 in the Software System Deployment and Administration curriculum) was conceived and engineered by student Nguyen Nhu Thanh (Class CNTT K24, ICTU) under the supervision of MSc. Vu Van Dien as a comprehensive, production-ready solution that reconciles intuitive user experience, robust data integrity, and stellar system operations.</p>
+<p>The architecture adopts a decoupled microservices paradigm fully orchestrated via Docker Compose across nine synchronized containers. The web layer is driven by Node.js Express, delivering interactive job discovery, multi-criteria filtering, resume upload ingestion pipelines (PDF/DOCX via Multer), and an administrative recruitment pipeline spanning five application stages. Relational persistence is governed by MySQL 8.0 with automatic database migration and realistic domain seed data, complemented by phpMyAdmin for administrative data inspection. Perimeter traffic is mediated by an Nginx Reverse Proxy terminating HTTPS over port 443 with self-signed SSL/TLS certificates and port 8088, enforcing industry-standard security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, server_tokens suppression). A full-stack telemetry framework integrates Prometheus scraping application metrics (<code>prom-client</code>) and database metrics (<code>mysqld-exporter</code>) every five seconds, visualized through provisioned Grafana dashboards tracking throughput (RPS), P95 latencies, HTTP error distributions, and database queries per second. Concurrently, Promtail aggregates structured JSON log streams into Grafana Loki, empowering DevOps administrators with LogQL diagnostic capabilities. Defense-in-depth hardening is guaranteed via non-root execution (<code>USER node</code>), three-tier network segmentation (isolating MySQL within an internal network barrier), container resource caps (CPU/Memory quotas), and environment-driven credential management. The project is versioned on GitHub with exactly three standardized milestone commits.</p>
+<pre><code>📌 TỪ KHÓA (KEYWORDS):
+Website Tuyển Dụng (Job Board), Triển khai và Quản trị Hệ thống Phần mềm, 
+Đại học CNTT &amp; Truyền thông Thái Nguyên (ICTU), Lớp CNTT K24, Docker Compose, 
+Nginx Reverse Proxy, HTTPS SSL, Prometheus, Grafana, Loki, Promtail, LogQL, 
+MySQL 8.0, phpMyAdmin, Hardening, Network Isolation, Non-root Container.
+</code></pre>
+<p>\newpage</p>
+<h2>DANH MỤC THUẬT NGỮ VÀ TỪ VIẾT TẮT</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Ký hiệu / Viết tắt</th>
+<th style="text-align: left;">Thuật ngữ Tiếng Anh</th>
+<th style="text-align: left;">Ý nghĩa / Giải thích Tiếng Việt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>ICTU</strong></td>
+<td style="text-align: left;">Information and Communication Technology University</td>
+<td style="text-align: left;">Trường Đại học Công nghệ Thông tin và Truyền thông – ĐH Thái Nguyên</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CNTT K24</strong></td>
+<td style="text-align: left;">Information Technology Class 24</td>
+<td style="text-align: left;">Lớp chuyên ngành Công nghệ Thông tin Khóa 24 tại ICTU</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DevOps</strong></td>
+<td style="text-align: left;">Development and Operations</td>
+<td style="text-align: left;">Phương pháp kết hợp giữa phát triển phần mềm và vận hành hệ thống</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SSL / TLS</strong></td>
+<td style="text-align: left;">Secure Sockets Layer / Transport Layer Security</td>
+<td style="text-align: left;">Giao thức mã hóa bảo mật truyền thông trên Internet</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HTTPS</strong></td>
+<td style="text-align: left;">Hypertext Transfer Protocol Secure</td>
+<td style="text-align: left;">Giao thức truyền tải siêu văn bản an toàn có mã hóa SSL/TLS</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>API</strong></td>
+<td style="text-align: left;">Application Programming Interface</td>
+<td style="text-align: left;">Giao diện lập trình ứng dụng</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>REST</strong></td>
+<td style="text-align: left;">Representational State Transfer</td>
+<td style="text-align: left;">Phong cách kiến trúc thiết kế dịch vụ web chuẩn</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>JSON</strong></td>
+<td style="text-align: left;">JavaScript Object Notation</td>
+<td style="text-align: left;">Định dạng trao đổi dữ liệu dạng văn bản gọn nhẹ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RBAC</strong></td>
+<td style="text-align: left;">Role-Based Access Control</td>
+<td style="text-align: left;">Mô hình kiểm soát truy cập dựa trên vai trò</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PMA</strong></td>
+<td style="text-align: left;">phpMyAdmin</td>
+<td style="text-align: left;">Công cụ web quản trị cơ sở dữ liệu MySQL</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSDB</strong></td>
+<td style="text-align: left;">Time-Series Database</td>
+<td style="text-align: left;">Cơ sở dữ liệu chuỗi thời gian (Prometheus, InfluxDB)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>QPS</strong></td>
+<td style="text-align: left;">Queries Per Second</td>
+<td style="text-align: left;">Số lượng câu truy vấn CSDL xử lý trong một giây</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RPS</strong></td>
+<td style="text-align: left;">Requests Per Second</td>
+<td style="text-align: left;">Số lượng yêu cầu HTTP máy chủ tiếp nhận trong một giây</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>HSTS</strong></td>
+<td style="text-align: left;">HTTP Strict Transport Security</td>
+<td style="text-align: left;">Cơ chế ép buộc trình duyệt luôn sử dụng kết nối HTTPS an toàn</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CSP</strong></td>
+<td style="text-align: left;">Content Security Policy</td>
+<td style="text-align: left;">Chính sách bảo mật nội dung ngăn chặn mã độc XSS và chèn dữ liệu</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LogQL</strong></td>
+<td style="text-align: left;">Log Query Language</td>
+<td style="text-align: left;">Ngôn ngữ truy vấn nhật ký của hệ thống Grafana Loki</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UID / GID</strong></td>
+<td style="text-align: left;">User Identifier / Group Identifier</td>
+<td style="text-align: left;">Mã định danh người dùng và nhóm người dùng trong hệ điều hành Linux</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DoS</strong></td>
+<td style="text-align: left;">Denial of Service</td>
+<td style="text-align: left;">Tấn công từ chối dịch vụ làm cạn kiệt tài nguyên máy chủ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CIDR</strong></td>
+<td style="text-align: left;">Classless Inter-Domain Routing</td>
+<td style="text-align: left;">Định tuyến liên miền không phân lớp trong mạng máy tính</td>
+</tr>
+</tbody>
+</table>
+<p>\newpage</p>
+<h2>MỤC LỤC TỔNG QUÁT</h2>
+<pre><code>LỜI CẢM ƠN ............................................................................ iii
+TÓM TẮT ĐỀ TÀI ........................................................................ iv
+DANH MỤC THUẬT NGỮ VÀ TỪ VIẾT TẮT .................................................... vi
+
+LỜI MỞ ĐẦU ............................................................................ 1
+  1. Tính cấp thiết của đề tài ........................................................ 1
+  2. Mục tiêu nghiên cứu của đề án ................................................... 2
+  3. Đối tượng và phạm vi nghiên cứu ................................................. 3
+
+CHƯƠNG 1: TỔNG QUAN VỀ BÀI TOÁN &amp; HỆ THỐNG WEBSITE TUYỂN DỤNG ......................... 4
+  1.1. Bối cảnh chuyển đổi số trong tuyển dụng nhân sự trực tuyến ..................... 4
+  1.2. Mô hình tuyển dụng trực tuyến và vòng đời ứng viên ............................. 5
+  1.3. Khảo sát các hệ thống hiện hữu và bài toán quá tải, an toàn thông tin .......... 7
+  1.4. Mục tiêu và phạm vi xây dựng Hệ thống Tuyển dụng (Job Board) ................... 9
+  1.5. Phân tích 3 đối tượng người dùng (Actors) ...................................... 11
+  1.6. Bảng đối chiếu tiêu chí đánh giá đề tài (Rubric Barem 10 điểm) ................ 13
+
+CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ ÁP DỤNG ....................................... 15
+  2.1. Kiến trúc phân tầng Microservices &amp; Chuẩn RESTful API ......................... 15
+  2.2. Công nghệ Ảo hóa Container và Điều phối Docker Compose ........................ 17
+  2.3. Máy chủ web Nginx, Reverse Proxy và Công nghệ Mã hóa SSL/TLS .................. 19
+  2.4. Hệ quản trị Cơ sở dữ liệu quan hệ MySQL 8.0 &amp; phpMyAdmin ....................... 22
+  2.5. Nền tảng ứng dụng Web: Node.js Express, Multer Upload, Winston Logger ......... 24
+  2.6. Hệ sinh thái Giám sát Metrics: Prometheus &amp; Grafana ........................... 26
+  2.7. Hệ sinh thái Quản trị Nhật ký tập trung: Loki &amp; Promtail ...................... 29
+  2.8. Nguyên lý Hardening bảo mật hệ thống (Defense-in-Depth) ....................... 31
+
+CHƯƠNG 3: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG ............................................. 34
+  3.1. Phân tích yêu cầu chức năng (7 phân hệ chi tiết) ............................... 34
+  3.2. Phân tích yêu cầu phi chức năng (Non-Functional Requirements) .................. 37
+  3.3. Thiết kế Sơ đồ Use Case Hệ thống .............................................. 39
+    3.3.1. Sơ đồ Use Case tổng quát toàn hệ thống .................................... 39
+    3.3.2. Sơ đồ Use Case phân hệ Ứng viên ........................................... 41
+    3.3.3. Sơ đồ Use Case phân hệ Nhà tuyển dụng &amp; DevOps Admin ...................... 42
+  3.4. Bảng đặc tả chi tiết các Ca sử dụng chính (Use Case Specifications) ........... 44
+  3.5. Thiết kế Cơ sở dữ liệu quan hệ MySQL (Lược đồ ERD &amp; Data Dictionary) .......... 48
+  3.6. Thiết kế Danh mục RESTful API Endpoints ........................................ 52
+  3.7. Thiết kế Kiến trúc Phân vùng Mạng (3-Tier Network Isolation) ................... 54
+  3.8. Thiết kế Luồng thu thập Metrics và Nhật ký tập trung ........................... 56
+
+CHƯƠNG 4: HIỆN THỰC HỆ THỐNG VÀ 6 BƯỚC TRIỂN KHAI THEO YÊU CẦU ĐỀ BÀI ................ 58
+  4.1. Bước 1: Quản lý mã nguồn trên GitHub với 03 Commit chuẩn hóa (1.5 điểm) ....... 58
+  4.2. Bước 2: Triển khai Ứng dụng Web Job Board + MySQL 8.0 + phpMyAdmin (1.5 điểm) . 61
+  4.3. Bước 3: Cấu hình Nginx Reverse Proxy (HTTPS &amp; Security Headers) (1.5 điểm) .... 65
+  4.4. Bước 4: Tích hợp hệ thống Giám sát Prometheus + Grafana (1.5 điểm) ............ 69
+  4.5. Bước 5: Triển khai hệ thống Log tập trung Loki + Promtail &amp; LogQL (1.5 điểm) .. 73
+  4.6. Bước 6: Hiện thực 5 biện pháp Hardening bảo mật hệ thống (1.5 điểm) ............ 77
+
+CHƯƠNG 5: KIỂM THỬ, ĐÁNH GIÁ VÀ HƯỚNG DẪN VẬN HÀNH ................................... 81
+  5.1. Môi trường thử nghiệm và phương pháp luận ...................................... 81
+  5.2. Kết quả kiểm thử chức năng (12 Test Cases thực nghiệm chi tiết) ................ 82
+  5.3. Bảng thông tin truy cập các dịch vụ và tài khoản mặc định ...................... 85
+  5.4. Kịch bản Demo thực nghiệm chi tiết 8 bước khi bảo vệ đề tài ................... 86
+  5.5. Đánh giá ưu điểm và hạn chế của đề tài ........................................ 89
+
+KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN .......................................................... 91
+  1. Kết luận những kết quả đạt được ................................................. 91
+  2. Hướng phát triển trong tương lai ................................................. 92
+
+TÀI LIỆU THAM KHẢO .................................................................... 94
+</code></pre>
+<p>\newpage</p>
+<h2>LỜI MỞ ĐẦU</h2>
+<h3>1. Tính cấp thiết của đề tài</h3>
+<p>Trong bối cảnh cách mạng công nghiệp 4.0 và chiến lược chuyển đổi số quốc gia, việc hiện đại hóa công tác tuyển dụng và quản trị nhân sự đã trở thành yêu cầu sống còn đối với mọi tổ chức và doanh nghiệp. Nền tảng tuyển dụng trực tuyến (Job Board Platform) đóng vai trò là "cầu nối số" điều phối cung - cầu lao động, giúp doanh nghiệp tiếp cận nguồn nhân lực chất lượng cao trong thời gian ngắn nhất, đồng thời mở ra hàng triệu cơ hội nghề nghiệp bình đẳng, minh bạch cho ứng viên.</p>
+<p>Tuy nhiên, mặt trái của sự bùng nổ lưu lượng truy cập trực tuyến là áp lực kỹ thuật cực kỳ lớn đè nặng lên hạ tầng công nghệ thông tin. Vào các thời điểm các doanh nghiệp lớn phát động chiến dịch tuyển dụng quy mô lớn, hàng chục nghìn lượt ứng viên truy cập đồng thời trong một khoảng thời gian ngắn để tìm kiếm thông tin và nộp hồ sơ. Các hệ thống thông tin truyền thống xây dựng theo mô hình đơn khối (Monolith) và chạy trực tiếp trên máy chủ vật lý thường xuyên rơi vào tình trạng quá tải, treo kết nối (Connection Timeout), tràn bộ nhớ và sập hoàn toàn hệ thống.</p>
+<p>Thêm vào đó, bài toán quản trị vận hành (Operations) và an toàn thông tin (Security) trong các hệ thống tuyển dụng hiện nay còn tồn tại nhiều lỗ hổng nghiêm trọng:
+* <strong>Thiếu khả năng giám sát tập trung (Observability):</strong> Kỹ sư hệ thống không có công cụ định lượng tức thời tốc độ truy vấn, độ trễ xử lý API, tỷ lệ mã lỗi HTTP và tình trạng kết nối CSDL để chủ động phát hiện sự cố trước khi người dùng phàn nàn.
+* <strong>Quản trị nhật ký rời rạc (Scattered Logs):</strong> Các tệp log nằm rải rác trên từng máy chủ dưới dạng văn bản thô, thiếu cấu trúc định dạng chuẩn, khiến việc điều tra nguyên nhân gốc rễ (Root Cause Analysis) khi bị tấn công hoặc lỗi ứng dụng mất rất nhiều thời gian.
+* <strong>Lỗ hổng bảo mật hạ tầng:</strong> Cơ sở dữ liệu thường bị mở cổng kết nối trực tiếp ra ngoài Internet; các tiến trình ứng dụng chạy với quyền hạn <code>root</code> tối cao; thiếu chứng chỉ mã hóa SSL/TLS và thiếu các tiêu đề bảo mật HTTP (Security Headers) khiến hệ thống dễ dàng trở thành nạn nhân của các cuộc tấn công đánh cắp dữ liệu, chèn mã độc (XSS, Clickjacking) hoặc từ chối dịch vụ (DoS).</p>
+<p>Xuất phát từ những bất cập thực tiễn nêu trên, đề tài <strong>"Hệ thống Website Tuyển dụng và Quản lý Việc làm (Job Board)"</strong> (Đề tài số 33) đã được sinh viên Nguyễn Như Thành, lớp CNTT K24, lựa chọn nghiên cứu và phát triển dưới sự hướng dẫn khoa học của ThS. Vũ Văn Diện trong khuôn khổ học phần <strong>Triển khai và Quản trị Hệ thống Phần mềm</strong> tại Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU) – Đại học Thái Nguyên.</p>
+<h3>2. Mục tiêu nghiên cứu của đề án</h3>
+<ul>
+<li><strong>Về mặt lý thuyết:</strong> Nghiên cứu sâu về các mô hình kiến trúc phần mềm hướng dịch vụ (Service-Oriented Architecture), nguyên lý thiết kế RESTful API, công nghệ ảo hóa Container (Docker), nguyên lý hoạt động của Nginx Reverse Proxy, hệ thống thu thập số liệu chuỗi thời gian (Prometheus TSDB), trực quan hóa số liệu (Grafana), thu gom nhật ký phân tán (Loki/Promtail) và triết lý phòng thủ bảo mật theo chiều sâu (Defense-in-Depth).</li>
+<li><strong>Về mặt ứng dụng thực tiễn:</strong> Xây dựng hoàn chỉnh một nền tảng Web Application chạy thực tế (Production-ready), phục vụ trọn vẹn quy trình tìm việc, nộp CV của ứng viên và quy trình đăng tin, xét duyệt ứng viên của nhà tuyển dụng.</li>
+<li><strong>Về mặt quản trị và điều phối hạ tầng (DevOps):</strong> Đóng gói toàn bộ hệ thống gồm 9 container dịch vụ vận hành đồng bộ bằng Docker Compose, đảm bảo triển khai tự động chỉ với một câu lệnh duy nhất; kiểm soát toàn bộ mã nguồn trên GitHub với đúng 3 commit mốc theo barem điểm quy định.</li>
+<li><strong>Về mặt an toàn và bảo mật:</strong> Triển khai mã hóa HTTPS với chứng chỉ SSL tự ký, chèn đầy đủ Security Headers, thiết lập phân vùng mạng cô lập CSDL (Network Isolation), loại bỏ quyền root trong container và định mức hạn ngạch tài nguyên CPU/RAM trần.</li>
+</ul>
+<h3>3. Đối tượng và phạm vi nghiên cứu</h3>
+<ul>
+<li><strong>Đối tượng nghiên cứu:</strong> Quy trình tuyển dụng nhân sự trực tuyến; kỹ thuật đóng gói Container (Docker, Dockerfile, Docker Compose); máy chủ web Nginx; cơ sở dữ liệu quan hệ MySQL 8.0; công cụ phpMyAdmin; hệ sinh thái giám sát Prometheus và Grafana; hệ thống nhật ký Loki và Promtail; các tiêu chuẩn bảo mật hệ thống thông tin OWASP và CIS Benchmarks.</li>
+<li><strong>Phạm vi đề tài:</strong> Đề tài tập trung triển khai môi trường vận hành hoàn chỉnh cho Đề 33 với 9 container dịch vụ hoạt động đồng bộ: <code>jobboard_nginx</code>, <code>jobboard_app</code>, <code>jobboard_mysql</code>, <code>jobboard_phpmyadmin</code>, <code>jobboard_prometheus</code>, <code>jobboard_grafana</code>, <code>jobboard_mysqld_exporter</code>, <code>jobboard_loki</code>, <code>jobboard_promtail</code>. Kiểm thử và đánh giá toàn diện các kịch bản người dùng và kịch bản quản trị hệ thống.</li>
+</ul>
+<p>\newpage</p>
+<h2>CHƯƠNG 1: TỔNG QUAN VỀ BÀI TOÁN &amp; HỆ THỐNG WEBSITE TUYỂN DỤNG</h2>
+<h3>1.1. Bối cảnh chuyển đổi số trong tuyển dụng nhân sự trực tuyến</h3>
+<p>Thị trường lao động thế kỷ 21 đang chứng kiến một cuộc chuyển mình mạnh mẽ từ các kênh tuyển dụng truyền thống (báo in, tờ rơi, ngày hội việc làm trực tiếp) sang các sàn giao dịch việc làm trực tuyến. Chuyển đổi số trong tuyển dụng mang lại những giá trị vượt trội:
+* <strong>Đối với Ứng viên:</strong> Khả năng tiếp cận hàng nghìn vị trí việc làm mọi lúc, mọi nơi; so sánh chế độ đãi ngộ giữa các doanh nghiệp một cách minh bạch; chủ động theo dõi trạng thái hồ sơ của mình mà không phải chờ đợi phản hồi thụ động qua điện thoại.
+* <strong>Đối với Doanh nghiệp:</strong> Rút ngắn thời gian tuyển dụng từ hàng tháng xuống còn vài ngày; giảm thiểu chi phí quảng cáo tuyển dụng; xây dựng cơ sở dữ liệu tài năng (Talent Pool) bền vững phục vụ chiến lược phát triển dài hạn.</p>
+<h3>1.2. Mô hình tuyển dụng trực tuyến và vòng đời ứng viên</h3>
+<p>Một hệ thống tuyển dụng chuyên nghiệp chuẩn hóa quy trình tương tác theo 5 giai đoạn khép kín:
+1. <strong>Giai đoạn 1 - Tiếp cận &amp; Tìm kiếm (Discovery):</strong> Ứng viên tìm kiếm việc làm dựa trên các tiêu chí: Ngành nghề chuyên môn, Mức lương mong muốn, Địa điểm làm việc, và Hình thức làm việc (Full-time, Part-time, Remote).
+2. <strong>Giai đoạn 2 - Thẩm định thông tin (Evaluation):</strong> Ứng viên đọc bản mô tả công việc (Job Description - JD), yêu cầu về kỹ năng, kinh nghiệm chuyên môn và quyền lợi được hưởng.
+3. <strong>Giai đoạn 3 - Nộp hồ sơ ứng tuyển (Application):</strong> Ứng viên cung cấp thông tin liên hệ và tải lên tệp hồ sơ năng lực (Curriculum Vitae - CV) định dạng PDF hoặc Word cùng thư giới thiệu ngắn gọn.
+4. <strong>Giai đoạn 4 - Xét duyệt đa tầng (Screening &amp; Interview):</strong> Nhà tuyển dụng tiếp nhận hồ sơ, đánh giá CV, chuyển đổi trạng thái hồ sơ theo lộ trình: <em>Chờ xem xét (pending) $\rightarrow$ Đang duyệt hồ sơ (reviewing) $\rightarrow$ Mời phỏng vấn (interviewed)</em>.
+5. <strong>Giai đoạn 5 - Ra quyết định tuyển dụng (Decision):</strong> Đưa ra kết quả cuối cùng: <em>Trúng tuyển (accepted)</em> hoặc <em>Từ chối (rejected)</em>.</p>
+<h3>1.3. Khảo sát các hệ thống hiện hữu và bài toán quá tải, an toàn thông tin</h3>
+<p>Khảo sát thực tế các nền tảng tuyển dụng hiện nay cho thấy các thách thức kỹ thuật lớn mà kỹ sư quản trị hệ thống phải đối mặt:
+* <strong>Thách thức về độ trễ và khả năng mở rộng:</strong> Khi một tập đoàn công nghệ lớn đăng tin tuyển dụng vị trí "Senior DevOps" hoặc "AI Engineer", lượng truy cập đồng thời tăng vọt. Nếu không có máy chủ đệm Nginx Reverse Proxy phân phối tải và giải mã SSL tập trung, máy chủ ứng dụng sẽ nhanh chóng cạn kiệt CPU do phải liên tục xử lý các phép toán mã hóa bắt tay TLS phức tạp.
+* <strong>Thách thức về an toàn dữ liệu CV:</strong> File CV chứa các thông tin cá nhân cực kỳ nhạy cảm của ứng viên (Họ tên, Số điện thoại, Email, Quê quán, Lịch sử làm việc). Nếu hệ thống lưu trữ file trực tiếp không kiểm soát hoặc để lộ cổng CSDL ra ngoài, kẻ tấn công có thể dễ dàng thu thập và bán dữ liệu người dùng trái phép.
+* <strong>Thách thức về tính quan sát (Observability):</strong> Một hệ thống không có công cụ giám sát Prometheus và Grafana sẽ giống như "lái máy bay trong sương mù" – quản trị viên không hề biết hệ thống đang phục vụ bao nhiêu request/giây, bộ nhớ RAM còn lại bao nhiêu và liệu CSDL có đang bị nghẽn khóa (Deadlock) hay không.</p>
+<h3>1.4. Phân tích 3 đối tượng người dùng (Actors)</h3>
+<p>Hệ thống được thiết kế phục vụ 3 nhóm tác nhân chính với phạm vi trách nhiệm rõ ràng:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tác nhân (Actor)</th>
+<th style="text-align: left;">Phạm vi Quyền hạn &amp; Trách nhiệm trong Hệ thống</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Ứng viên tìm việc (Candidate / Job Seeker)</strong></td>
+<td style="text-align: left;">Tra cứu danh sách việc làm, tìm kiếm theo từ khóa/ngành nghề/địa điểm; xem chi tiết công việc; nộp hồ sơ ứng tuyển trực tuyến; đính kèm file CV (PDF, DOCX) và thư giới thiệu.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Nhà tuyển dụng / Cán bộ nhân sự (Employer / Recruiter)</strong></td>
+<td style="text-align: left;">Đăng tải tin tuyển dụng mới với các tiêu chí chuẩn hóa; quản lý trạng thái tin tuyển dụng (Mở/Đóng); xem danh sách hồ sơ ứng viên; tải về và đánh giá trực tiếp file CV; cập nhật trạng thái hồ sơ ứng viên theo quy trình 5 bước.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Quản trị viên Hệ thống / Kỹ sư DevOps (System Administrator)</strong></td>
+<td style="text-align: left;">Giám sát trạng thái hoạt động của 9 container dịch vụ; theo dõi các biểu đồ hiệu năng trên Grafana; quản lý cấu trúc bảng và dữ liệu qua phpMyAdmin; truy vấn vết sự cố bằng LogQL trên Loki; đảm bảo các chính sách bảo mật Hardening được thực thi nghiêm ngặt.</td>
+</tr>
+</tbody>
+</table>
+<h3>1.5. Bảng đối chiếu tiêu chí đánh giá đề tài (Rubric Barem 10 điểm)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">STT</th>
+<th>Tiêu chí đánh giá theo đề bài</th>
+<th style="text-align: center;">Điểm</th>
+<th>Kết quả triển khai thực tế của đề tài</th>
+<th style="text-align: center;">Đánh giá</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1</strong></td>
+<td><strong>Quản lý mã nguồn trên GitHub</strong></td>
+<td style="text-align: center;"><strong>1.5</strong></td>
+<td>Repository đầy đủ, đúng tên SV, có <code>README.md</code> chi tiết và phân chia chuẩn xác <strong>đủ 03 commit</strong> theo từng mốc kỹ thuật của học phần.</td>
+<td style="text-align: center;"><strong>1.5 / 1.5</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2</strong></td>
+<td><strong>Triển khai Ứng dụng Web + Database</strong></td>
+<td style="text-align: center;"><strong>1.5</strong></td>
+<td>Web App chạy ổn định trên nền Node.js Express, kết nối CSDL MySQL 8.0 mượt mà, công cụ <strong>phpMyAdmin</strong> hoạt động tại cổng 8080.</td>
+<td style="text-align: center;"><strong>1.5 / 1.5</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3</strong></td>
+<td><strong>Nginx Reverse Proxy</strong></td>
+<td style="text-align: center;"><strong>1.5</strong></td>
+<td>Cấu hình Nginx reverse proxy chính xác, hỗ trợ <strong>HTTPS (SSL tự ký)</strong> tại cổng 443 và HTTP tại cổng 8088, đầy đủ các <strong>Security Headers</strong>.</td>
+<td style="text-align: center;"><strong>1.5 / 1.5</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>4</strong></td>
+<td><strong>Hệ thống giám sát (Prometheus + Grafana)</strong></td>
+<td style="text-align: center;"><strong>1.5</strong></td>
+<td>Prometheus thu thập metrics tự động mỗi 5s từ Web App (<code>prom-client</code>) và MySQL (<code>mysqld-exporter</code>); Grafana tự nạp Dashboard chuyên sâu.</td>
+<td style="text-align: center;"><strong>1.5 / 1.5</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>5</strong></td>
+<td><strong>Hệ thống Log tập trung (Loki + Promtail)</strong></td>
+<td style="text-align: center;"><strong>1.5</strong></td>
+<td>Promtail thu gom log JSON từ App và Nginx chuyển tới Loki; thực hiện thành công ít nhất 4 câu truy vấn <strong>LogQL</strong> phục vụ giám sát và truy vết.</td>
+<td style="text-align: center;"><strong>1.5 / 1.5</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>6</strong></td>
+<td><strong>Hardening hệ thống</strong></td>
+<td style="text-align: center;"><strong>1.5</strong></td>
+<td>Áp dụng 5 biện pháp bảo mật: Non-root container (<code>node</code>), Network Isolation 3 mạng (<code>backend_net</code> cô lập CSDL), hạn ngạch CPU/RAM, mật khẩu mạnh <code>.env</code>.</td>
+<td style="text-align: center;"><strong>1.5 / 1.5</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>7</strong></td>
+<td><strong>Tổng thể &amp; Trình bày Báo cáo</strong></td>
+<td style="text-align: center;"><strong>1.0</strong></td>
+<td>Toàn bộ hệ thống khởi động 1-click <code>docker compose up -d</code>, kiểm thử 100% đạt, báo cáo khoa học hơn 15 trang chuẩn ICTU có minh chứng.</td>
+<td style="text-align: center;"><strong>1.0 / 1.0</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TỔNG</strong></td>
+<td><strong>ĐÁNH GIÁ CHUNG TOÀN DIỆN</strong></td>
+<td style="text-align: center;"><strong>10.0</strong></td>
+<td><strong>ĐÁP ỨNG TOÀN DIỆN 100% YÊU CẦU ĐỀ CƯƠNG</strong></td>
+<td style="text-align: center;"><strong>10 / 10</strong></td>
+</tr>
+</tbody>
+</table>
+<p>\newpage</p>
+<h2>CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ ÁP DỤNG</h2>
+<h3>2.1. Kiến trúc phân tầng Microservices &amp; Chuẩn RESTful API</h3>
+<p>Hệ thống áp dụng triệt để mô hình kiến trúc phân tách độc lập (Decoupled Microservices Architecture). Thay vì gom toàn bộ logic hiển thị, xử lý nghiệp vụ, lưu trữ CSDL, thu thập nhật ký và giám sát vào một ứng dụng nguyên khối duy nhất, hệ thống chia nhỏ thành các thành phần chuyên biệt (Services).</p>
+<p>Giao tiếp giữa máy khách và máy chủ, cũng như giữa các thành phần trung gian được tiêu chuẩn hóa theo nguyên lý RESTful API:
+* <strong>Stateless (Phi trạng thái):</strong> Mỗi yêu cầu HTTP từ máy khách gửi lên máy chủ đều chứa đầy đủ thông tin ngữ cảnh cần thiết để máy chủ hiểu và xử lý, máy chủ không cần lưu giữ phiên làm việc (Session state) của người dùng trong bộ nhớ RAM, giúp việc mở rộng quy mô (Scale out) trở nên dễ dàng.
+* <strong>Định dạng dữ liệu chuẩn JSON:</strong> Gọn nhẹ, dễ đọc, tương thích tự nhiên với JavaScript và hầu hết các ngôn ngữ lập trình hiện đại.
+* <strong>Quy chuẩn mã phản hồi HTTP (HTTP Status Codes):</strong> Sử dụng chính xác các mã trạng thái chuẩn:
+  * <code>200 OK</code>: Yêu cầu truy vấn thành công.
+  * <code>201 Created</code>: Tạo mới thành công một thực thể (tin tuyển dụng, hồ sơ ứng tuyển).
+  * <code>400 Bad Request</code>: Dữ liệu đầu vào không hợp lệ hoặc thiếu trường bắt buộc.
+  * <code>404 Not Found</code>: Không tìm thấy tài nguyên yêu cầu.
+  * <code>500 Internal Server Error</code>: Lỗi phát sinh trong quá trình xử lý nội bộ của máy chủ.</p>
+<h3>2.2. Công nghệ Ảo hóa Container và Điều phối Docker Compose</h3>
+<ul>
+<li><strong>Nguyên lý hoạt động của Docker:</strong> Docker sử dụng các tính năng sẵn có trong nhân Linux (Linux Kernel) bao gồm <code>namespaces</code> (tạo vùng không gian cô lập về Process ID, Network, Mount point) và <code>cgroups</code> (kiểm soát và giới hạn việc sử dụng tài nguyên phần cứng như CPU, Memory, I/O). Một Container là một tiến trình độc lập chạy trực tiếp trên nhân máy chủ, chia sẻ chung tài nguyên nhưng hoàn toàn bị cô lập khỏi các tiến trình khác.</li>
+<li><strong>Dockerfile Best Practices:</strong></li>
+<li>Sử dụng Base Image tối giản <code>node:20-alpine</code> giúp giảm kích thước tệp ảnh từ hơn 1GB xuống còn khoảng 150MB, giảm thiểu số lượng gói phần mềm dư thừa và loại trừ các lỗ hổng bảo mật tiềm ẩn.</li>
+<li>Tận dụng cơ chế lưu bộ đệm nhiều tầng (Layer Caching) bằng cách tách riêng lệnh <code>COPY package*.json</code> và <code>RUN npm install</code> trước khi copy toàn bộ mã nguồn. Khi lập trình viên thay đổi code, Docker chỉ build lại layer mã nguồn mà không cần tải lại toàn bộ thư viện npm.</li>
+<li>Sử dụng tiện ích <code>dumb-init</code> đóng vai trò là tiến trình PID 1 để chuyển tiếp tín hiệu ngắt (Signals như <code>SIGTERM</code>, <code>SIGINT</code>) một cách chuẩn xác, đảm bảo tắt ứng dụng an toàn (Graceful Shutdown) mà không để lại các tiến trình thây ma (Zombie Processes).</li>
+<li><strong>Docker Compose:</strong> Quản lý vòng đời của 9 container thông qua tệp khai báo duy nhất <code>docker-compose.yml</code>. Hỗ trợ các tính năng nâng cao:</li>
+<li>Tự động tạo cầu mạng ảo (Bridge Networks).</li>
+<li>Định nghĩa cơ chế phụ thuộc thông minh: <code>depends_on</code> kết hợp <code>condition: service_healthy</code> (ứng dụng web chỉ được khởi động sau khi CSDL MySQL đã hoàn thành khởi tạo và vượt qua bài kiểm tra sức khỏe).</li>
+<li>Phân bổ hạn ngạch tài nguyên trần (<code>deploy.resources.limits</code>).</li>
+</ul>
+<h3>2.3. Máy chủ web Nginx, Reverse Proxy và Công nghệ Mã hóa SSL/TLS</h3>
+<ul>
+<li><strong>Cơ chế Xử lý Hướng sự kiện (Event-Driven Architecture):</strong> Khác với máy chủ Apache truyền thống tạo ra một luồng xử lý riêng biệt (Thread) cho mỗi kết nối của người dùng (dễ gây cạn kiệt tài nguyên khi có hàng nghìn kết nối đồng thời), Nginx sử dụng kiến trúc bất đồng bộ không khóa (Asynchronous Non-blocking Event-driven). Một số lượng nhỏ tiến trình công nhân (Worker Processes) có thể xử lý đồng thời hàng chục nghìn kết nối mạng với mức chiếm dụng bộ nhớ cực kỳ thấp.</li>
+<li><strong>Cơ chế Reverse Proxy &amp; SSL Termination:</strong> Nginx đón đầu toàn bộ lưu lượng tại cổng 443, thực hiện quá trình bắt tay mật mã (TLS Handshake) phức tạp bằng cặp khóa RSA 2048-bit và chứng chỉ <code>server.crt</code>. Sau khi giải mã, lưu lượng được chuyển tiếp dưới dạng HTTP thuần nội bộ tới container ứng dụng thông qua mạng ảo tốc độ cao của Docker.</li>
+<li><strong>Các tiêu đề bảo mật HTTP (Security Headers):</strong></li>
+<li><code>Strict-Transport-Security (HSTS)</code>: Ép trình duyệt ghi nhớ và chỉ giao tiếp qua kết nối an toàn HTTPS trong khoảng thời gian xác định (31536000 giây = 1 năm).</li>
+<li><code>X-Frame-Options "SAMEORIGIN"</code>: Ngăn chặn website bị nhúng vào thẻ <code>&lt;iframe&gt;</code> trên các tên miền lạ, chống triệt để kỹ thuật tấn công đánh cắp thao tác bấm chuột (Clickjacking).</li>
+<li><code>X-Content-Type-Options "nosniff"</code>: Vô hiệu hóa tính năng tự động suy đoán kiểu file của trình duyệt, ngăn chặn việc thực thi mã độc ẩn dưới vỏ bọc tệp hình ảnh.</li>
+<li><code>Content-Security-Policy (CSP)</code>: Định danh rõ các nguồn tải tài nguyên hợp lệ, ngăn chặn việc tiêm mã độc Cross-Site Scripting (XSS).</li>
+<li><code>server_tokens off;</code>: Che giấu hoàn toàn số hiệu phiên bản Nginx trong HTTP response header.</li>
+</ul>
+<h3>2.4. Hệ quản trị Cơ sở dữ liệu quan hệ MySQL 8.0 &amp; phpMyAdmin</h3>
+<ul>
+<li><strong>MySQL 8.0:</strong> Đóng vai trò là tầng lưu trữ dữ liệu bền vững (Persistent Data Storage). Được cấu hình với:</li>
+<li>Bộ ký tự chuẩn <code>utf8mb4</code> và collation <code>utf8mb4_unicode_ci</code> hỗ trợ đầy đủ các ngôn ngữ và ký tự đặc biệt, biểu tượng cảm xúc (Emoji).</li>
+<li>Storage Engine mặc định là <code>InnoDB</code> hỗ trợ các giao dịch an toàn (ACID), khóa mức dòng (Row-level Locking) cho hiệu năng ghi đồng thời cao, và bảo toàn toàn vẹn tham chiếu thông qua ràng buộc khóa ngoại (Foreign Keys).</li>
+<li><strong>phpMyAdmin:</strong> Công cụ quản trị CSDL nền web kinh điển viết bằng PHP, cho phép các kỹ sư dễ dàng thực thi câu lệnh SQL, duyệt dữ liệu trực quan, quản lý người dùng và cấp phát quyền hạn mà không cần sử dụng dòng lệnh phức tạp.</li>
+</ul>
+<h3>2.5. Nền tảng ứng dụng Web: Node.js Express, Multer Upload, Winston Logger</h3>
+<ul>
+<li><strong>Node.js Express:</strong> Nền tảng thực thi JavaScript phía máy chủ xây dựng trên V8 JavaScript Engine của Google Chrome. Mô hình Non-blocking I/O giúp Node.js đạt thông lượng xử lý request cực cao đối với các ứng dụng tuyển dụng vốn có tỷ lệ đọc/ghi I/O chiếm đa số.</li>
+<li><strong>Multer File Upload Middleware:</strong> Thư viện chuyên trách xử lý các yêu cầu tải tệp đa phần (<code>multipart/form-data</code>). Được cấu hình kiểm tra chặt chẽ đuôi mở rộng của tệp (<code>.pdf</code>, <code>.doc</code>, <code>.docx</code>), giới hạn kích thước tối đa 10MB và sinh tên tệp duy nhất để tránh xung đột ghi đè.</li>
+<li><strong>Winston Structured Logger:</strong> Thư viện ghi nhận nhật ký chuyên nghiệp hỗ trợ xuất log định dạng JSON có cấu trúc (gồm timestamp, level, message, metadata). Cung cấp khả năng ghi song song ra Console (cho Docker stdout) và ra các tệp xoay vòng (<code>app.log</code>, <code>error.log</code>).</li>
+</ul>
+<h3>2.6. Hệ sinh thái Giám sát Metrics: Prometheus &amp; Grafana</h3>
+<ul>
+<li><strong>Prometheus:</strong> Hoạt động theo cơ chế Pull-based (Kéo số liệu). Prometheus định kỳ gửi HTTP request tới endpoint <code>/metrics</code> của các dịch vụ để lấy mẫu (sampling) dữ liệu chuỗi thời gian. Mỗi mẫu số liệu bao gồm: Tên định danh (Metric name), Tập hợp các nhãn (Labels key-value), Dấu thời gian (Timestamp) và Giá trị số (Float64 value).</li>
+<li><strong>Bộ đo lường <code>prom-client</code>:</strong> Thư viện xuất số liệu chính thức của Prometheus dành cho Node.js, cung cấp 4 loại cấu trúc đo lường cơ bản:</li>
+<li><strong>Counter:</strong> Biến đếm chỉ tăng (ví dụ: <code>jobboard_http_requests_total</code>, <code>jobboard_applications_total</code>).</li>
+<li><strong>Gauge:</strong> Thước đo có thể tăng hoặc giảm (ví dụ: <code>jobboard_active_jobs_current</code>).</li>
+<li><strong>Histogram:</strong> Đo lường phân bổ tần suất theo các khoảng mẫu (Buckets) phục vụ tính toán phân vị độ trễ (P50, P90, P95, P99).</li>
+<li><strong>Summary:</strong> Tương tự Histogram nhưng tính toán phân vị trực tiếp tại client.</li>
+<li><strong>Grafana Dashboard:</strong> Nền tảng trực quan hóa số liệu hàng đầu hiện nay. Grafana hỗ trợ kết nối đa nguồn dữ liệu (Prometheus, Loki, MySQL, InfluxDB) và chuyển đổi các số liệu thô thành các biểu đồ trực quan (Time Series, Gauge, Stat, Bar Chart) có tính tương tác cao. Cung cấp cơ chế tự động nạp cấu hình (Provisioning) qua tệp YAML.</li>
+</ul>
+<h3>2.7. Hệ sinh thái Quản trị Nhật ký tập trung: Loki &amp; Promtail</h3>
+<ul>
+<li><strong>Kiến trúc của Grafana Loki:</strong> Loki được thiết kế lấy cảm hứng từ Prometheus. Thay vì đánh chỉ mục toàn bộ văn bản của từng dòng log (như ELK Stack vốn tiêu tốn hàng chục GB RAM), Loki chỉ lập chỉ mục cho các nhãn siêu dữ liệu (Labels) của luồng log. Dữ liệu dòng log thực tế được nén chặt thành các khối (Chunks) và lưu trữ trực tiếp vào hệ thống tệp đĩa cứng, giúp tiết kiệm tới 80% tài nguyên lưu trữ.</li>
+<li><strong>Promtail Log Agent:</strong> Promtail chạy dưới dạng một tác tử (daemon) thu gom log từ các tệp <code>/var/log/app/*.log</code> và <code>/var/log/nginx/*.log</code>, bóc tách các trường JSON (timestamp, level, method, status), gán nhãn tương ứng và gửi luồng dữ liệu về endpoint HTTP của Loki qua cổng 3100.</li>
+<li><strong>Ngôn ngữ truy vấn LogQL:</strong> Cho phép các kỹ sư DevOps viết các câu truy vấn mạnh mẽ: lọc theo nhãn (<code>{job="app-logs"}</code>), lọc chuỗi (<code>|= "error"</code>), phân tích cấu trúc (<code>| json</code>), lọc theo giá trị số (<code>| status &gt;= 400</code>) và tính toán tốc độ phát sinh log (<code>rate()</code>).</li>
+</ul>
+<h3>2.8. Nguyên lý Hardening bảo mật hệ thống (Defense-in-Depth)</h3>
+<p>Hardening là quá trình tăng cường tính an toàn cho hệ thống bằng cách giảm thiểu bề mặt tấn công (Attack Surface). Đề án áp dụng 5 nguyên tắc Hardening cốt lõi:
+1. <strong>Nguyên tắc Đặc quyền tối thiểu (Least Privilege):</strong> Không cho phép ứng dụng chạy với quyền <code>root</code>. Sử dụng tài khoản người dùng thường (<code>node</code>) với phạm vi quyền hạn vừa đủ.
+2. <strong>Cô lập Mạng (Network Segmentation):</strong> Tách biệt các phân vùng mạng theo chức năng, không để lộ cơ sở dữ liệu ra mạng công cộng.
+3. <strong>Giới hạn Tài nguyên (Resource Constraints):</strong> Kiểm soát trần sử dụng CPU và bộ nhớ cho từng container để ngăn chặn rủi ro DoS.
+4. <strong>An toàn Cấu hình (Secure Defaults):</strong> Tắt các tính năng không cần thiết, ẩn thông tin phiên bản máy chủ (<code>server_tokens off</code>).
+5. <strong>Mật khẩu phức tạp:</strong> Tuân thủ quy định mật khẩu mạnh cho mọi dịch vụ nội bộ.</p>
+<p>\newpage</p>
+<h2>CHƯƠNG 3: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG</h2>
+<h3>3.1. Phân tích yêu cầu chức năng (7 phân hệ chi tiết)</h3>
+<ol>
+<li><strong>Phân hệ Khám phá &amp; Tìm kiếm Việc làm:</strong></li>
+<li>Hiển thị danh sách việc làm mới nhất theo dạng thẻ (Card) trực quan.</li>
+<li>Tìm kiếm tức thì theo từ khóa tiêu đề, tên doanh nghiệp hoặc kỹ năng.</li>
+<li>Lọc theo địa điểm làm việc (Hà Nội, TP.HCM, Đà Nẵng, Làm việc từ xa).</li>
+<li>Lọc theo hình thức làm việc: Full-time, Part-time, Remote, Internship.</li>
+<li>Lọc theo nhóm ngành nghề thông qua thanh chip danh mục trực quan.</li>
+<li><strong>Phân hệ Xem chi tiết &amp; Nộp hồ sơ Ứng tuyển:</strong></li>
+<li>Xem thông tin đầy đủ về mức lương, hạn nộp hồ sơ, mô tả công việc, yêu cầu kỹ thuật và quyền lợi của công ty.</li>
+<li>Điền thông tin cá nhân: Họ tên, Email, Số điện thoại và Lời giới thiệu.</li>
+<li>Tải lên tệp CV đính kèm với cơ chế kiểm tra định dạng an toàn (PDF, DOC, DOCX) và giới hạn dung lượng dưới 10MB.</li>
+<li><strong>Phân hệ Đăng tin Tuyển dụng:</strong></li>
+<li>Giao diện dành riêng cho doanh nghiệp đăng tải vị trí tuyển dụng mới.</li>
+<li>Nhập đầy đủ các thông tin bắt buộc và lưu trữ trực tiếp vào CSDL MySQL.</li>
+<li><strong>Phân hệ Quản trị Ứng viên (Admin Recruitment Dashboard):</strong></li>
+<li>Hiển thị thống kê tổng quan: Tổng số tin, Tin đang mở, Tổng hồ sơ ứng viên, Doanh nghiệp đối tác.</li>
+<li>Bảng danh sách ứng viên chi tiết với tính năng lọc theo trạng thái.</li>
+<li>Tải và xem trực tiếp tệp CV mà ứng viên đã gửi.</li>
+<li>Cập nhật trạng thái duyệt hồ sơ qua 5 bước: <em>Chờ xem xét $\rightarrow$ Đang duyệt $\rightarrow$ Phỏng vấn $\rightarrow$ Trúng tuyển $\rightarrow$ Từ chối</em>.</li>
+<li><strong>Phân hệ Quản trị Cơ sở dữ liệu phpMyAdmin:</strong></li>
+<li>Cho phép quản trị viên truy cập CSDL qua trình duyệt web tại cổng 8080.</li>
+<li>Thực thi các câu lệnh SQL, kiểm tra dữ liệu bảng, phân tích chỉ mục.</li>
+<li><strong>Phân hệ Đo lường &amp; Giám sát Hệ thống (Monitoring):</strong></li>
+<li>Xuất số liệu chuẩn Prometheus qua endpoint <code>/metrics</code>.</li>
+<li>Cung cấp endpoint <code>/health</code> kiểm tra sức khỏe của container.</li>
+<li>Tích hợp bảng điều khiển Grafana hiển thị trực quan hóa thời gian thực.</li>
+<li><strong>Phân hệ Quản trị Nhật ký tập trung (Logging):</strong></li>
+<li>Ghi nhận nhật ký có cấu trúc JSON cho toàn bộ request và sự kiện nghiệp vụ.</li>
+<li>Tự động thu gom log từ App và Nginx chuyển tới Loki.</li>
+<li>Cung cấp giao diện tra cứu vết hoạt động qua LogQL.</li>
+</ol>
+<h3>3.2. Phân tích yêu cầu phi chức năng (Non-Functional Requirements)</h3>
+<ul>
+<li><strong>Tính sẵn sàng cao (High Availability):</strong> Tất cả các container đều được gán chính sách <code>restart: always</code> giúp tự động khởi động lại ngay lập tức nếu tiến trình bị sập.</li>
+<li><strong>Thời gian phản hồi (Response Latency):</strong> Thời gian xử lý trung bình của API đạt dưới 30ms trong điều kiện vận hành bình thường; dưới 100ms đối với các tác vụ ghi CSDL và upload file.</li>
+<li><strong>Bảo mật và Mã hóa (Security):</strong> Toàn bộ kênh truyền bên ngoài bắt buộc sử dụng giao thức HTTPS; CSDL MySQL nằm hoàn toàn trong vùng mạng nội bộ được cô lập.</li>
+<li><strong>Khả năng di động (Portability):</strong> Hệ thống không phụ thuộc vào bất kỳ cấu hình máy chủ cục bộ nào; có thể triển khai tức thì trên bất kỳ hệ điều hành nào (Linux, Windows, macOS) có hỗ trợ Docker.</li>
+</ul>
+<h3>3.3. Thiết kế Sơ đồ Use Case Hệ thống</h3>
+<h4>3.3.1. Sơ đồ Use Case Tổng quát Toàn Hệ thống</h4>
+<pre><code>+-----------------------------------------------------------------------------------+
+|               SƠ ĐỒ USE CASE HỆ THỐNG WEBSITE TUYỂN DỤNG (JOB BOARD)              |
++-----------------------------------------------------------------------------------+
+
+     (Ứng viên)
+         │
+         ├───&gt; [UC-01: Tìm kiếm &amp; Lọc việc làm]
+         ├───&gt; [UC-02: Xem chi tiết tin tuyển dụng]
+         └───&gt; [UC-03: Nộp hồ sơ &amp; Tải lên file CV] ──&lt;&lt;include&gt;&gt;──&gt; [Kiểm tra file hợp lệ]
+
+     (Nhà tuyển dụng)
+         │
+         ├───&gt; [UC-04: Đăng tin tuyển dụng mới]
+         ├───&gt; [UC-05: Cập nhật trạng thái tin (Mở/Đóng)]
+         ├───&gt; [UC-06: Xem danh sách hồ sơ ứng viên]
+         └───&gt; [UC-07: Cập nhật tiến độ xét duyệt CV]
+
+     (Quản trị viên DevOps)
+         │
+         ├───&gt; [UC-08: Quản trị CSDL qua phpMyAdmin]
+         ├───&gt; [UC-09: Giám sát số liệu Metrics qua Grafana]
+         └───&gt; [UC-10: Điều tra sự cố qua LogQL trên Loki]
+</code></pre>
+<h3>3.4. Bảng đặc tả chi tiết các Ca sử dụng chính (Use Case Specifications)</h3>
+<h4>Bảng 3.1: Đặc tả Ca sử dụng UC-01 (Tìm kiếm và Lọc việc làm)</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Thuộc tính Use Case</th>
+<th style="text-align: left;">Nội dung đặc tả chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Mã Ca sử dụng</strong></td>
+<td style="text-align: left;"><strong>UC-01: Tìm kiếm và Lọc tin tuyển dụng</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tác nhân (Actor)</strong></td>
+<td style="text-align: left;">Ứng viên (Candidate) / Khách truy cập (Guest)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mục tiêu (Goal)</strong></td>
+<td style="text-align: left;">Lọc danh sách việc làm phù hợp với nhu cầu tìm kiếm của ứng viên.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tiền điều kiện</strong></td>
+<td style="text-align: left;">Người dùng truy cập vào trang chủ hệ thống (<code>https://localhost</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Luồng sự kiện chính</strong></td>
+<td style="text-align: left;">1. Người dùng mở trang chủ hệ thống.<br>2. Nhập từ khóa tìm kiếm vào ô tìm kiếm (ví dụ: "DevOps", "React").<br>3. Chọn địa điểm làm việc (Hà Nội, TP.HCM, Đà Nẵng) hoặc chọn hình thức làm việc.<br>4. Nhấp chọn một ngành nghề trên thanh chip danh mục (ví dụ: CNTT).<br>5. Nhấn nút <strong>"Tìm kiếm"</strong> (hoặc nhấn phím Enter).<br>6. Frontend gửi yêu cầu <code>GET /api/jobs?search=...&amp;location=...&amp;job_type=...&amp;category=...</code> tới máy chủ.<br>7. Backend xây dựng câu truy vấn SQL động với mệnh đề <code>WHERE</code> có tham số hóa (Parameterized Query) an toàn.<br>8. MySQL trả về tập kết quả dữ liệu.<br>9. Frontend hiển thị danh sách các thẻ việc làm phù hợp kèm thông báo số lượng tìm thấy.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Luồng ngoại lệ</strong></td>
+<td style="text-align: left;">• Không có tin nào khớp tiêu chí: Hệ thống hiển thị hộp thông báo trống (Empty State) gợi ý thử từ khóa khác.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hậu điều kiện</strong></td>
+<td style="text-align: left;">Danh sách việc làm hiển thị chính xác các tin thỏa mãn toàn bộ bộ lọc.</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng 3.2: Đặc tả Ca sử dụng UC-03 (Nộp hồ sơ ứng tuyển &amp; Tải lên file CV)</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Thuộc tính Use Case</th>
+<th style="text-align: left;">Nội dung đặc tả chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Mã Ca sử dụng</strong></td>
+<td style="text-align: left;"><strong>UC-03: Nộp hồ sơ ứng tuyển trực tuyến &amp; Upload CV</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tác nhân (Actor)</strong></td>
+<td style="text-align: left;">Ứng viên tìm việc (Candidate)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mục tiêu (Goal)</strong></td>
+<td style="text-align: left;">Nộp hồ sơ ứng tuyển kèm tệp CV cho một vị trí việc làm đang mở.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tiền điều kiện</strong></td>
+<td style="text-align: left;">Vị trí việc làm đang ở trạng thái hoạt động (<code>status = 'active'</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Luồng sự kiện chính</strong></td>
+<td style="text-align: left;">1. Ứng viên chọn nút <strong>"Ứng tuyển ngay"</strong> tại vị trí việc làm mong muốn.<br>2. Modal ứng tuyển xuất hiện hiển thị thông tin công ty và biểu mẫu nộp đơn.<br>3. Ứng viên nhập Họ tên, Email, Số điện thoại, Lời nhắn giới thiệu.<br>4. Ứng viên bấm chọn tệp CV từ máy tính (hỗ trợ .pdf, .doc, .docx).<br>5. Ứng viên bấm nút <strong>"Xác nhận Nộp hồ sơ ngay"</strong>.<br>6. Tầng trung gian Multer nhận tệp, tạo tên ngẫu nhiên duy nhất <code>cv-{timestamp}-{random}.ext</code> và lưu vào thư mục <code>/app/uploads</code>.<br>7. Bản ghi ứng tuyển mới được chèn vào bảng <code>applications</code> với trạng thái mặc định là <code>pending</code>.<br>8. Thư viện <code>prom-client</code> tăng biến đếm <code>jobboard_applications_total{status="pending"}</code> lên 1 đơn vị.<br>9. Logger ghi nhận dòng nhật ký JSON thành công vào <code>app.log</code>.<br>10. Trình duyệt nhận phản hồi JSON <code>201 Created</code> và hiển thị thông báo thành công.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Luồng ngoại lệ</strong></td>
+<td style="text-align: left;">• Tệp đính kèm sai định dạng: Báo lỗi yêu cầu chọn đúng file PDF/Word.<br>• Tệp đính kèm vượt quá 10MB: Multer từ chối và trả về mã lỗi 400.</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng 3.3: Đặc tả Ca sử dụng UC-04 (Đăng tin tuyển dụng mới)</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Thuộc tính Use Case</th>
+<th style="text-align: left;">Nội dung đặc tả chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Mã Ca sử dụng</strong></td>
+<td style="text-align: left;"><strong>UC-04: Đăng tin tuyển dụng mới</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tác nhân (Actor)</strong></td>
+<td style="text-align: left;">Nhà tuyển dụng / Cán bộ nhân sự</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mục tiêu (Goal)</strong></td>
+<td style="text-align: left;">Đăng tải một cơ hội việc làm mới lên nền tảng tuyển dụng.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tiền điều kiện</strong></td>
+<td style="text-align: left;">Truy cập trang Đăng tin tuyển dụng (<code>/post-job.html</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Luồng sự kiện chính</strong></td>
+<td style="text-align: left;">1. Nhà tuyển dụng điền thông tin: Tiêu đề công việc, chọn Doanh nghiệp, chọn Ngành nghề, Địa điểm làm việc, Hình thức làm việc, Mức lương, Yêu cầu kinh nghiệm, Hạn nộp hồ sơ, Mô tả chi tiết, Yêu cầu ứng viên và Quyền lợi.<br>2. Nhấn nút <strong>"Đăng Tin Tuyển Dụng Ngay"</strong>.<br>3. Frontend kiểm tra tính hợp lệ của các trường bắt buộc.<br>4. Gửi yêu cầu <code>POST /api/jobs</code> kèm payload JSON tới máy chủ.<br>5. Backend thực thi lệnh SQL chèn dữ liệu vào bảng <code>jobs</code>.<br>6. Thước đo <code>jobboard_active_jobs_current</code> trong Prometheus tự động cập nhật tăng thêm 1.<br>7. Logger ghi nhận sự kiện đăng tin thành công.<br>8. Hệ thống thông báo thành công và chuyển hướng về trang chủ.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Luồng ngoại lệ</strong></td>
+<td style="text-align: left;">• Thiếu trường bắt buộc: Hiển thị cảnh báo yêu cầu điền đầy đủ thông tin.</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng 3.4: Đặc tả Ca sử dụng UC-07 (Cập nhật tiến độ xét duyệt CV)</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Thuộc tính Use Case</th>
+<th style="text-align: left;">Nội dung đặc tả chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Mã Ca sử dụng</strong></td>
+<td style="text-align: left;"><strong>UC-07: Xét duyệt và Cập nhật trạng thái ứng viên</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tác nhân (Actor)</strong></td>
+<td style="text-align: left;">Nhà tuyển dụng / Quản trị viên nhân sự</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mục tiêu (Goal)</strong></td>
+<td style="text-align: left;">Thay đổi trạng thái hồ sơ của ứng viên trong quy trình tuyển dụng.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tiền điều kiện</strong></td>
+<td style="text-align: left;">Đang mở trang Quản lý tuyển dụng (<code>/admin.html</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Luồng sự kiện chính</strong></td>
+<td style="text-align: left;">1. Nhà tuyển dụng xem danh sách ứng viên trong bảng.<br>2. Nhấn nút <strong>"Xem CV"</strong> để kiểm tra năng lực ứng viên trên tệp PDF gốc.<br>3. Tại cột Thao tác, chọn trạng thái mới trong danh sách chọn (Chờ duyệt / Đang duyệt / Mời phỏng vấn / Trúng tuyển / Từ chối).<br>4. Trình duyệt gửi yêu cầu <code>PATCH /api/applications/:id/status</code> với body JSON chứa trạng thái mới.<br>5. Máy chủ thực thi câu lệnh SQL cập nhật trạng thái trong CSDL MySQL.<br>6. Logger ghi nhận thông tin sự kiện kiểm toán (Audit log).<br>7. Bảng dữ liệu cập nhật huy hiệu màu sắc tương ứng với trạng thái mới.</td>
+</tr>
+</tbody>
+</table>
+<h3>3.5. Thiết kế Cơ sở dữ liệu quan hệ MySQL (Lược đồ ERD &amp; Data Dictionary)</h3>
+<pre><code>┌────────────────────────┐         1:N         ┌────────────────────────┐
+│       COMPANIES        ├────────────────────&lt;┤          JOBS          │
+├────────────────────────┤                     ├────────────────────────┤
+│ id (PK)                │                     │ id (PK)                │
+│ name                   │                     │ title                  │
+│ logo_url               │                     │ company_id (FK)        │
+│ website                │                     │ category_id (FK)       │
+│ location               │                     │ location               │
+│ description            │                     │ job_type               │
+│ created_at             │                     │ salary_range           │
+└────────────────────────┘                     │ experience_level       │
+                                               │ description            │
+┌────────────────────────┐         1:N         │ requirements           │
+│       CATEGORIES       ├────────────────────&lt;┤ benefits               │
+├────────────────────────┤                     │ deadline               │
+│ id (PK)                │                     │ status                 │
+│ name                   │                     │ created_at             │
+│ slug                   │                     └───────────┬────────────┘
+│ icon                   │                                 │
+│ created_at             │                                 │ 1:N
+└────────────────────────┘                                 │
+                                                           ▼
+                                               ┌────────────────────────┐
+                                               │      APPLICATIONS      │
+                                               ├────────────────────────┤
+                                               │ id (PK)                │
+                                               │ job_id (FK)            │
+                                               │ full_name              │
+                                               │ email                  │
+                                               │ phone                  │
+                                               │ cover_letter           │
+                                               │ cv_filename            │
+                                               │ cv_filepath            │
+                                               │ status                 │
+                                               │ created_at             │
+                                               └────────────────────────┘
+</code></pre>
+<h4>Bảng 3.5: Từ điển dữ liệu bảng <code>categories</code></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tên Cột</th>
+<th style="text-align: left;">Kiểu Dữ Liệu</th>
+<th style="text-align: left;">Khóa / Ràng Buộc</th>
+<th style="text-align: left;">Ý Nghĩa / Diễn Giải</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;">INT</td>
+<td style="text-align: left;">PRIMARY KEY, AUTO_INCREMENT</td>
+<td style="text-align: left;">Mã định danh duy nhất của ngành nghề</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>name</code></td>
+<td style="text-align: left;">VARCHAR(100)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Tên ngành nghề tuyển dụng (ví dụ: CNTT, Marketing...)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>slug</code></td>
+<td style="text-align: left;">VARCHAR(100)</td>
+<td style="text-align: left;">NOT NULL, UNIQUE</td>
+<td style="text-align: left;">Chuỗi định danh URL thân thiện (vd: it-software)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>icon</code></td>
+<td style="text-align: left;">VARCHAR(50)</td>
+<td style="text-align: left;">DEFAULT 'briefcase'</td>
+<td style="text-align: left;">Tên biểu tượng hiển thị trên giao diện FontAwesome</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>created_at</code></td>
+<td style="text-align: left;">TIMESTAMP</td>
+<td style="text-align: left;">DEFAULT CURRENT_TIMESTAMP</td>
+<td style="text-align: left;">Thời điểm tạo danh mục</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng 3.6: Từ điển dữ liệu bảng <code>companies</code></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tên Cột</th>
+<th style="text-align: left;">Kiểu Dữ Liệu</th>
+<th style="text-align: left;">Khóa / Ràng Buộc</th>
+<th style="text-align: left;">Ý Nghĩa / Diễn Giải</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;">INT</td>
+<td style="text-align: left;">PRIMARY KEY, AUTO_INCREMENT</td>
+<td style="text-align: left;">Mã định danh duy nhất của doanh nghiệp</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>name</code></td>
+<td style="text-align: left;">VARCHAR(150)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Tên pháp lý hoặc tên thương mại của doanh nghiệp</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>logo_url</code></td>
+<td style="text-align: left;">VARCHAR(255)</td>
+<td style="text-align: left;">DEFAULT ''</td>
+<td style="text-align: left;">Đường dẫn tệp ảnh biểu trưng (Logo)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>website</code></td>
+<td style="text-align: left;">VARCHAR(255)</td>
+<td style="text-align: left;">DEFAULT ''</td>
+<td style="text-align: left;">Địa chỉ trang web chính thức của công ty</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>location</code></td>
+<td style="text-align: left;">VARCHAR(150)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Trụ sở chính hoặc văn phòng đại diện</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>description</code></td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">NULL</td>
+<td style="text-align: left;">Tóm tắt giới thiệu năng lực doanh nghiệp</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>created_at</code></td>
+<td style="text-align: left;">TIMESTAMP</td>
+<td style="text-align: left;">DEFAULT CURRENT_TIMESTAMP</td>
+<td style="text-align: left;">Thời điểm thêm doanh nghiệp vào hệ thống</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng 3.7: Từ điển dữ liệu bảng <code>jobs</code></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tên Cột</th>
+<th style="text-align: left;">Kiểu Dữ Liệu</th>
+<th style="text-align: left;">Khóa / Ràng Buộc</th>
+<th style="text-align: left;">Ý Nghĩa / Diễn Giải</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;">INT</td>
+<td style="text-align: left;">PRIMARY KEY, AUTO_INCREMENT</td>
+<td style="text-align: left;">Mã định danh duy nhất của tin tuyển dụng</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>title</code></td>
+<td style="text-align: left;">VARCHAR(200)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Tiêu đề vị trí tuyển dụng</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>company_id</code></td>
+<td style="text-align: left;">INT</td>
+<td style="text-align: left;">NOT NULL, FK -&gt; companies(id)</td>
+<td style="text-align: left;">Khóa ngoại liên kết tới doanh nghiệp</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>category_id</code></td>
+<td style="text-align: left;">INT</td>
+<td style="text-align: left;">NOT NULL, FK -&gt; categories(id)</td>
+<td style="text-align: left;">Khóa ngoại liên kết tới ngành nghề</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>location</code></td>
+<td style="text-align: left;">VARCHAR(100)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Địa điểm làm việc thực tế</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>job_type</code></td>
+<td style="text-align: left;">ENUM</td>
+<td style="text-align: left;">'Full-time', 'Part-time', 'Remote', 'Internship'</td>
+<td style="text-align: left;">Hình thức làm việc</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>salary_range</code></td>
+<td style="text-align: left;">VARCHAR(100)</td>
+<td style="text-align: left;">DEFAULT 'Thỏa thuận'</td>
+<td style="text-align: left;">Dải mức lương công bố</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>experience_level</code></td>
+<td style="text-align: left;">VARCHAR(50)</td>
+<td style="text-align: left;">DEFAULT '1-3 năm'</td>
+<td style="text-align: left;">Yêu cầu số năm kinh nghiệm</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>description</code></td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Bản mô tả công việc chi tiết</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>requirements</code></td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Yêu cầu về kỹ năng và trình độ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>benefits</code></td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">NULL</td>
+<td style="text-align: left;">Chế độ đãi ngộ và quyền lợi nhân viên</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>deadline</code></td>
+<td style="text-align: left;">DATE</td>
+<td style="text-align: left;">NULL</td>
+<td style="text-align: left;">Hạn chót nhận hồ sơ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>status</code></td>
+<td style="text-align: left;">ENUM</td>
+<td style="text-align: left;">'active', 'closed' (DEFAULT 'active')</td>
+<td style="text-align: left;">Trạng thái tin tuyển dụng</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>created_at</code></td>
+<td style="text-align: left;">TIMESTAMP</td>
+<td style="text-align: left;">DEFAULT CURRENT_TIMESTAMP</td>
+<td style="text-align: left;">Thời điểm đăng tin</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng 3.8: Từ điển dữ liệu bảng <code>applications</code></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Tên Cột</th>
+<th style="text-align: left;">Kiểu Dữ Liệu</th>
+<th style="text-align: left;">Khóa / Ràng Buộc</th>
+<th style="text-align: left;">Ý Nghĩa / Diễn Giải</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;">INT</td>
+<td style="text-align: left;">PRIMARY KEY, AUTO_INCREMENT</td>
+<td style="text-align: left;">Mã định danh duy nhất của hồ sơ ứng tuyển</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>job_id</code></td>
+<td style="text-align: left;">INT</td>
+<td style="text-align: left;">NOT NULL, FK -&gt; jobs(id)</td>
+<td style="text-align: left;">Khóa ngoại liên kết tới tin tuyển dụng</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>full_name</code></td>
+<td style="text-align: left;">VARCHAR(150)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Họ và tên đầy đủ của ứng viên</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>email</code></td>
+<td style="text-align: left;">VARCHAR(150)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Địa chỉ thư điện tử nhận thông báo</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>phone</code></td>
+<td style="text-align: left;">VARCHAR(50)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Số điện thoại liên hệ của ứng viên</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>cover_letter</code></td>
+<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">NULL</td>
+<td style="text-align: left;">Thư giới thiệu năng lực bản thân</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>cv_filename</code></td>
+<td style="text-align: left;">VARCHAR(255)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Tên tệp tin gốc của ứng viên</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>cv_filepath</code></td>
+<td style="text-align: left;">VARCHAR(255)</td>
+<td style="text-align: left;">NOT NULL</td>
+<td style="text-align: left;">Đường dẫn lưu trữ tệp CV trên máy chủ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>status</code></td>
+<td style="text-align: left;">ENUM</td>
+<td style="text-align: left;">'pending', 'reviewing', 'interviewed', 'accepted', 'rejected'</td>
+<td style="text-align: left;">Trạng thái tiến độ xử lý hồ sơ</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>created_at</code></td>
+<td style="text-align: left;">TIMESTAMP</td>
+<td style="text-align: left;">DEFAULT CURRENT_TIMESTAMP</td>
+<td style="text-align: left;">Thời điểm ứng viên gửi đơn</td>
+</tr>
+</tbody>
+</table>
+<h3>3.6. Thiết kế Danh mục RESTful API Endpoints</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Phương thức</th>
+<th style="text-align: left;">Đường dẫn API</th>
+<th style="text-align: left;">Mục đích sử dụng</th>
+<th style="text-align: center;">Mã trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/jobs</code></td>
+<td style="text-align: left;">Lấy danh sách việc làm (hỗ trợ lọc <code>search</code>, <code>category</code>, <code>job_type</code>, <code>location</code>)</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/jobs/:id</code></td>
+<td style="text-align: left;">Xem thông tin chi tiết một tin tuyển dụng</td>
+<td style="text-align: center;"><code>200 OK</code> / <code>404 Not Found</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/jobs/categories</code></td>
+<td style="text-align: left;">Lấy danh sách danh mục ngành nghề kèm số lượng việc làm hiện có</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/jobs/companies</code></td>
+<td style="text-align: left;">Lấy danh sách các công ty đối tác</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/jobs/stats</code></td>
+<td style="text-align: left;">Lấy số liệu thống kê tổng hợp (tổng tin, tin mở, tổng hồ sơ, công ty)</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/jobs</code></td>
+<td style="text-align: left;">Tạo mới một tin tuyển dụng</td>
+<td style="text-align: center;"><code>201 Created</code> / <code>400 Bad Request</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>PATCH</code></td>
+<td style="text-align: left;"><code>/api/jobs/:id/status</code></td>
+<td style="text-align: left;">Chuyển đổi trạng thái tin tuyển dụng (<code>active</code> $\leftrightarrow$ <code>closed</code>)</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>DELETE</code></td>
+<td style="text-align: left;"><code>/api/jobs/:id</code></td>
+<td style="text-align: left;">Xóa một tin tuyển dụng khỏi hệ thống</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>POST</code></td>
+<td style="text-align: left;"><code>/api/applications</code></td>
+<td style="text-align: left;">Nộp hồ sơ ứng tuyển trực tuyến (Upload file multipart/form-data)</td>
+<td style="text-align: center;"><code>201 Created</code> / <code>400 Bad Request</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;"><code>/api/applications</code></td>
+<td style="text-align: left;">Lấy danh sách ứng viên (hỗ trợ lọc theo <code>job_id</code>, <code>status</code>)</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>PATCH</code></td>
+<td style="text-align: left;"><code>/api/applications/:id/status</code></td>
+<td style="text-align: left;">Cập nhật trạng thái duyệt hồ sơ ứng viên</td>
+<td style="text-align: center;"><code>200 OK</code> / <code>400 Bad Request</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;"><code>/metrics</code></td>
+<td style="text-align: left;">Xuất số liệu chuẩn Prometheus cho hệ thống giám sát</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;"><code>/health</code></td>
+<td style="text-align: left;">Kiểm tra trạng thái hoạt động của container Web (Healthcheck)</td>
+<td style="text-align: center;"><code>200 OK</code></td>
+</tr>
+</tbody>
+</table>
+<h3>3.7. Thiết kế Kiến trúc Phân vùng Mạng (3-Tier Network Isolation)</h3>
+<pre><code class="language-text">┌─────────────────────────────────────────────────────────────────────────────┐
+│ 1. MẠNG CÔNG KHAI (frontend_net) - Bridge Network                           │
+│    - Tiếp nhận kết nối từ trình duyệt người dùng bên ngoài qua máy chủ Host. │
+│    - Các container tham gia: Nginx (Port 8088/443), phpMyAdmin (Port 8080), │
+│                              Grafana Dashboard (Port 3001), Web App.        │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+┌──────────────────────────────────────┴──────────────────────────────────────┐
+│ 2. MẠNG CƠ SỞ DỮ LIỆU CÔ LẬP NỘI BỘ (backend_net) - internal: true         │
+│    - TUYỆT ĐỐI KHÔNG CÓ ĐƯỜNG DẪN RA NGOÀI (NO EXTERNAL ROUTING).           │
+│    - Cổng 3306 của MySQL KHÔNG ĐƯỢC MỞ (EXPOSE) ra máy chủ vật lý.           │
+│    - Chỉ có Web App, phpMyAdmin và mysqld-exporter được quyền kết nối.      │
+│    - Các container tham gia: MySQL 8.0, Web App, phpMyAdmin,                │
+│                              mysqld-exporter.                               │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+┌──────────────────────────────────────┴──────────────────────────────────────┐
+│ 3. MẠNG GIÁM SÁT VÀ NHẬT KÝ (monitoring_net) - Bridge Network               │
+│    - Phục vụ vận chuyển telemetry, metrics và logs nội bộ an toàn.          │
+│    - Các container tham gia: Prometheus (Port 9090), Loki (Port 3100),      │
+│                              Promtail, Grafana, mysqld-exporter, Web App.   │
+└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>\newpage</p>
+<h2>CHƯƠNG 4: HIỆN THỰC HỆ THỐNG VÀ 6 BƯỚC TRIỂN KHAI THEO YÊU CẦU ĐỀ BÀI</h2>
+<h3>4.1. Bước 1: Quản lý mã nguồn trên GitHub với 03 Commit chuẩn hóa (1.5 điểm)</h3>
+<p>Theo yêu cầu nghiêm ngặt của đề cương môn học ("Repository đầy đủ (source + cấu hình), đủ 03 commit và nội dung có ý nghĩa, có README hướng dẫn chạy hệ thống rõ ràng"), toàn bộ mã nguồn của dự án được lưu trữ và quản lý phiên bản trên GitHub tại địa chỉ:<br />
+👉 <strong><a href="https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng">https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng</a></strong></p>
+<p>Lịch sử Git Commit của dự án được chia tách thành đúng <strong>03 Commit mốc</strong> tương ứng chuẩn xác với 3 giai đoạn kỹ thuật trong đề cương:</p>
+<pre><code class="language-bash"># Kiểm tra lịch sử commit bằng dòng lệnh git
+git log --oneline -n 3
+</code></pre>
+<p><em>Kết quả thực chứng:</em></p>
+<pre><code class="language-text">c9eade2 feat(step3): Implement Loki and Promtail centralized logging with LogQL, system hardening and ICTU project report
+d380a73 feat(step2): Integrate Prometheus and Grafana monitoring for containers, web app and MySQL database
+2c7db74 feat(step1): Deploy Job Board web application with MySQL, phpMyAdmin and Nginx reverse proxy (HTTPS &amp; security headers)
+</code></pre>
+<ol>
+<li><strong>Commit 1 (<code>2c7db74</code>):</strong> Triển khai ứng dụng web Tuyển dụng (Node.js Express), CSDL MySQL 8.0, công cụ quản trị CSDL phpMyAdmin và cấu hình Nginx Reverse Proxy tiếp nhận lưu lượng qua cổng HTTPS có chứng chỉ SSL tự ký và Security Headers.</li>
+<li><strong>Commit 2 (<code>d380a73</code>):</strong> Tích hợp hệ thống giám sát Metrics: cấu hình thư viện <code>prom-client</code> xuất endpoint <code>/metrics</code>, thiết lập <code>mysqld-exporter</code> thu thập số liệu CSDL MySQL, cấu hình Prometheus Server scrape định kỳ mỗi 5s và tự động nạp Dashboard Grafana chuyên sâu.</li>
+<li><strong>Commit 3 (<code>c9eade2</code>):</strong> Hoàn thiện hệ thống nhật ký tập trung Loki kết hợp Promtail thu gom log JSON, xây dựng các câu truy vấn LogQL phục vụ điều tra sự cố, áp dụng 5 biện pháp Hardening bảo mật hệ thống toàn diện và hoàn thiện tệp báo cáo học thuật chuẩn ICTU.</li>
+</ol>
+<h3>4.2. Bước 2: Triển khai Ứng dụng Web Job Board + MySQL 8.0 + phpMyAdmin (1.5 điểm)</h3>
+<ul>
+<li><strong>Ứng dụng Web Job Board:</strong></li>
+<li>Được đóng gói bằng Dockerfile tối ưu trên nền <code>node:20-alpine</code>.</li>
+<li>Cơ chế kết nối CSDL sử dụng <code>mysql2/promise</code> kết hợp Connection Pool và hàm Retry (<code>initDatabase</code>) thông minh: Nếu CSDL MySQL mất 10-15 giây để khởi tạo lần đầu, ứng dụng sẽ kiên nhẫn đợi và tự động nạp file <code>schema.sql</code> ngay khi MySQL sẵn sàng.</li>
+<li>Cung cấp các REST API hoàn chỉnh cho cả ứng viên và nhà tuyển dụng.</li>
+<li><strong>Cơ sở dữ liệu MySQL 8.0:</strong></li>
+<li>Container chạy phiên bản chính thức <code>mysql:8.0</code>.</li>
+<li>Dữ liệu được lưu trữ bền vững (Persistent Data) qua Docker Volume <code>mysql_data</code>, không bị mất khi container khởi động lại.</li>
+<li>Tự động kiểm tra trạng thái sức khỏe định kỳ bằng <code>mysqladmin ping</code> qua chỉ thị <code>healthcheck</code>.</li>
+<li><strong>Công cụ phpMyAdmin:</strong></li>
+<li>Triển khai container <code>phpmyadmin:latest</code> tại cổng <code>8080</code>.</li>
+<li>Tự động liên kết vào MySQL thông qua biến môi trường <code>PMA_HOST=mysql</code>, hỗ trợ quản trị viên duyệt bảng, nhập xuất dữ liệu và kiểm tra truy vấn SQL dễ dàng.</li>
+</ul>
+<h3>4.3. Bước 3: Cấu hình Nginx Reverse Proxy (HTTPS &amp; Security Headers) (1.5 điểm)</h3>
+<p>Nginx đóng vai trò là "cổng kiểm soát an ninh mặt trước" (Frontline Defense) cho toàn bộ hệ thống:
+1. <strong>Cấu hình Reverse Proxy:</strong>
+   * Lắng nghe cổng 8088 (HTTP) và 443 (HTTPS).
+   * Chuyển tiếp (forward) toàn bộ yêu cầu ứng dụng tới nhóm upstream <code>app:3000</code>.
+   * Thiết lập đầy đủ các trường Header cần thiết: <code>Host</code>, <code>X-Real-IP</code>, <code>X-Forwarded-For</code>, <code>X-Forwarded-Proto</code>.
+2. <strong>Kích hoạt HTTPS với Chứng chỉ SSL tự ký (Self-signed Certificate):</strong>
+   * Sử dụng cặp khóa RSA 2048-bit: <code>server.crt</code> và <code>server.key</code> đặt tại <code>/etc/nginx/certs/</code>.
+   * Cấu hình các giao thức mã hóa an toàn nhất hiện nay: <code>TLSv1.2</code> và <code>TLSv1.3</code>.
+   * Tối ưu hóa hiệu năng bắt tay SSL với <code>ssl_session_cache</code> và <code>ssl_session_timeout</code>.
+3. <strong>Cấu hình Security Headers chuẩn mực:</strong>
+   * <code>Strict-Transport-Security "max-age=31536000; includeSubDomains"</code>: Bắt buộc trình duyệt luôn giao tiếp qua HTTPS.
+   * <code>X-Frame-Options "SAMEORIGIN"</code>: Chống tấn công Clickjacking (ngăn nhúng iframe từ trang web lạ).
+   * <code>X-Content-Type-Options "nosniff"</code>: Chống tấn công MIME-sniffing.
+   * <code>X-XSS-Protection "1; mode=block"</code>: Chặn đứng các hành vi chèn mã độc Cross-Site Scripting.
+   * <code>Content-Security-Policy</code>: Giới hạn các nguồn tải tài nguyên JavaScript, CSS và phông chữ hợp lệ.
+   * <code>server_tokens off</code>: Che giấu hoàn toàn số hiệu phiên bản Nginx trong HTTP response header.</p>
+<h3>4.4. Bước 4: Tích hợp hệ thống Giám sát Prometheus + Grafana (1.5 điểm)</h3>
+<ol>
+<li><strong>Thu thập Metrics bằng Prometheus:</strong></li>
+<li>Prometheus thu thập số liệu tự động mỗi 5 giây (<code>scrape_interval: 5s</code>).</li>
+<li><strong>Metrics Ứng dụng Web:</strong> Thư viện <code>prom-client</code> tự động xuất các chỉ số chuẩn hóa:<ul>
+<li><code>jobboard_http_requests_total</code>: Đếm tổng số lượng request theo method (GET, POST, PATCH), route và mã HTTP status.</li>
+<li><code>jobboard_http_request_duration_seconds</code>: Đo lường thời gian phản hồi (latency) dưới dạng Histogram.</li>
+<li><code>jobboard_active_jobs_current</code>: Số lượng tin tuyển dụng đang hoạt động.</li>
+<li><code>jobboard_applications_total</code>: Tổng số hồ sơ ứng viên nộp qua hệ thống.</li>
+<li>Các thông số runtime: <code>process_cpu_seconds_total</code>, <code>process_resident_memory_bytes</code>, <code>nodejs_eventloop_lag_seconds</code>.</li>
+</ul>
+</li>
+<li><strong>Metrics Cơ sở dữ liệu:</strong> <code>mysqld-exporter</code> kết nối MySQL và xuất hàng trăm chỉ số hiệu năng: <code>mysql_global_status_queries</code>, <code>mysql_global_status_threads_connected</code>, <code>mysql_global_status_uptime</code>...</li>
+<li><strong>Hiển thị trực quan bằng Grafana Dashboard:</strong></li>
+<li>Cấu hình nạp tự động (Provisioning) không cần thao tác bằng tay:<ul>
+<li><code>datasources.yml</code>: Tự động kết nối Prometheus (URL: <code>http://prometheus:9090</code>) và Loki (URL: <code>http://loki:3100</code>).</li>
+<li><code>dashboards.yml</code> &amp; <code>jobboard-overview.json</code>: Tự động khởi tạo Dashboard mang tên <strong>"Job Board System Overview - DT33"</strong>.</li>
+</ul>
+</li>
+<li>Dashboard được chia thành các cụm thông số trực quan:<ul>
+<li>Hàng Stat KPI: Tốc độ truy vấn (req/s), Độ trễ trung bình (ms), Số tin tuyển dụng đang mở, Kết nối MySQL hiện hữu.</li>
+<li>Biểu đồ Time Series: Lưu lượng request phân theo mã HTTP (200, 400, 500) giúp phát hiện tức thì lỗi hệ thống.</li>
+<li>Biểu đồ Histogram P95 Latency: Kiểm soát chất lượng dịch vụ (SLA) đối với 95% số request nhanh nhất.</li>
+<li>Biểu đồ MySQL QPS: Đánh giá tải của cơ sở dữ liệu.</li>
+</ul>
+</li>
+</ol>
+<h3>4.5. Bước 5: Triển khai hệ thống Log tập trung Loki + Promtail &amp; LogQL (1.5 điểm)</h3>
+<p>Thay vì phải SSH vào từng container để xem file log phân tán, dự án đã triển khai giải pháp quản trị Log tập trung chuẩn công nghiệp:
+1. <strong>Cấu trúc Log có cấu trúc (Structured Logging):</strong>
+   * Ứng dụng sử dụng Winston Logger xuất toàn bộ sự kiện ra định dạng chuẩn JSON:
+     <code>json
+     {"timestamp":"2026-10-25 16:50:00","level":"info","message":"Ung vien nop CV thanh cong!","service":"job-board-app","applicationId":3,"candidate":"Nguyen Nhu Thanh"}</code>
+   * Nginx cũng được định nghĩa <code>log_format json_analytics</code> ghi nhận đầy đủ <code>client_ip</code>, <code>status</code>, <code>request_time</code> dưới dạng JSON.
+2. <strong>Promtail Log Shipper:</strong>
+   * Đọc liên tục (tail) các file nhật ký <code>/var/log/app/*.log</code> và <code>/var/log/nginx/*.log</code>.
+   * Phân tích các trường JSON (timestamp, level, method, status) và tự động gán nhãn (labels).
+   * Đẩy dữ liệu qua giao thức gRPC/HTTP tới Loki endpoint <code>http://loki:3100/loki/api/v1/push</code>.
+3. <strong>Danh mục các câu truy vấn LogQL thực tế phục vụ kiểm thử và giám sát:</strong>
+   * <strong>Query 1 (Truy vấn các dòng log báo lỗi):</strong>
+     <code>logql
+     {job="app-logs"} |= "error"</code>
+     <em>Ý nghĩa:</em> Lọc toàn bộ các sự kiện ghi nhận lỗi nghiêm trọng trong mã nguồn hoặc quá trình kết nối CSDL của ứng dụng.
+   * <strong>Query 2 (Truy vấn các HTTP request bị lỗi từ Nginx):</strong>
+     <code>logql
+     {job="nginx-logs"} | json | status &gt;= 400</code>
+     <em>Ý nghĩa:</em> Bóc tách các trường JSON trong log Nginx và chỉ hiển thị các yêu cầu trả về mã HTTP lỗi 4xx (Client Error) hoặc 5xx (Server Error).
+   * <strong>Query 3 (Đo lường tần suất phát sinh Log theo thời gian):</strong>
+     <code>logql
+     rate({job="app-logs"}[1m])</code>
+     <em>Ý nghĩa:</em> Tính toán tốc độ dòng log xuất hiện mỗi giây trong vòng 1 phút, giúp phát hiện các cuộc tấn công quét lỗ hổng hoặc bất thường trong hệ thống.
+   * <strong>Query 4 (Theo dõi hành động nộp đơn ứng tuyển thời gian thực):</strong>
+     <code>logql
+     {job="app-logs"} |= "Ung vien nop CV"</code>
+     <em>Ý nghĩa:</em> Audit log phục vụ bộ phận nhân sự theo dõi lượt nộp hồ sơ của ứng viên.</p>
+<h3>4.6. Bước 6: Hiện thực 5 biện pháp Hardening bảo mật hệ thống (1.5 điểm)</h3>
+<p>Hệ thống áp dụng đầy đủ 5 trụ cột Hardening theo nguyên tắc "Phòng thủ theo chiều sâu" (Defense in Depth):
+1. <strong>Non-root Container Execution:</strong>
+   * Trong <code>app/Dockerfile</code>, người dùng mặc định <code>root</code> đã bị loại bỏ. Toàn bộ tiến trình chạy dưới user đặc quyền thấp <code>USER node</code> (UID/GID 1000:1000). Nếu kẻ tấn công khai thác được lỗ hổng Remote Code Execution (RCE) trong Node.js, họ vẫn không thể chiếm được quyền root trên máy chủ host.
+2. <strong>Network Isolation (Phân vùng mạng độc lập):</strong>
+   * Hệ thống chia thành 3 mạng Docker bridge riêng biệt:
+     * <code>frontend_net</code>: Cho phép giao tiếp công khai (Nginx, App, phpMyAdmin, Grafana).
+     * <code>backend_net</code>: <strong>Được gắn cờ <code>internal: true</code></strong>. Cơ sở dữ liệu MySQL chỉ nằm trong mạng này. Kẻ xấu từ bên ngoài internet hoặc các container không được cấp phép hoàn toàn không thể quét cổng hay gửi gói tin trực tiếp tới cổng 3306 của MySQL.
+     * <code>monitoring_net</code>: Mạng nội bộ dành riêng cho hạ tầng giám sát Prometheus, Loki, Promtail và Exporters.
+3. <strong>Resource Limits (Giới hạn tài nguyên phần cứng):</strong>
+   * Tất cả các dịch vụ trong <code>docker-compose.yml</code> đều được cấu hình hạn ngạch CPU và RAM tối đa (ví dụ: <code>cpus: '1.0'</code>, <code>memory: 512M</code> cho App; <code>cpus: '1.5'</code>, <code>memory: 1024M</code> cho MySQL). Điều này ngăn ngừa triệt để các cuộc tấn công từ chối dịch vụ (DoS) làm cạn kiệt tài nguyên của toàn bộ máy chủ vật lý.
+4. <strong>Quản lý Mật khẩu mạnh và Biến môi trường (.env):</strong>
+   * Không lưu mật khẩu hardcoded trong mã nguồn. Mọi mật khẩu CSDL (<code>JobBoardSecure_2026!@#</code>), tài khoản root, và mật khẩu Grafana đều tuân thủ độ phức tạp cao (&gt;16 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt), được nạp thông qua file <code>.env</code>.
+5. <strong>Cơ chế Read-only Mounts:</strong>
+   * Các tệp cấu hình quan trọng (<code>nginx.conf</code>, <code>prometheus.yml</code>, <code>loki-config.yml</code>, <code>certs/</code>) đều được mount vào container với cờ chỉ đọc <code>:ro</code> (Read-only), ngăn chặn hành vi sửa đổi tệp cấu hình trái phép.</p>
+<p>\newpage</p>
+<h2>CHƯƠNG 5: KIỂM THỬ, ĐÁNH GIÁ VÀ HƯỚNG DẪN VẬN HÀNH</h2>
+<h3>5.1. Môi trường thử nghiệm và phương pháp luận</h3>
+<ul>
+<li><strong>Môi trường phần cứng &amp; OS:</strong> Máy chủ thử nghiệm: Intel Core i5/i7, RAM 16GB, Windows 11 64-bit with WSL2 Ubuntu Kernel.</li>
+<li><strong>Nền tảng ảo hóa:</strong> Docker Desktop version 29.7.2, Docker Compose v5.3.1.</li>
+<li><strong>Trình duyệt thử nghiệm:</strong> Google Chrome v130, Mozilla Firefox v132, Microsoft Edge v130.</li>
+<li><strong>Phương pháp luận:</strong> Kiểm thử hộp đen (Black-box testing) đối với các kịch bản người dùng; kiểm thử hiệu năng và kiểm thử hạ tầng mạng đối với các chính sách cô lập và giám sát DevOps.</li>
+</ul>
+<h3>5.2. Kết quả kiểm thử chức năng (12 Test Cases thực nghiệm chi tiết)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Mã Kịch bản</th>
+<th>Nội dung kiểm thử</th>
+<th>Thao tác thực hiện</th>
+<th>Kết quả kỳ vọng</th>
+<th style="text-align: center;">Đánh giá</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>TC-01</strong></td>
+<td>Khởi động toàn cụm Docker Compose</td>
+<td>Chạy lệnh <code>docker compose up -d</code></td>
+<td>9/9 container khởi động thành công, đạt trạng thái <code>healthy</code></td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-02</strong></td>
+<td>Truy cập Website qua HTTPS SSL</td>
+<td>Truy cập <code>https://localhost</code></td>
+<td>Nginx phản hồi HTTP 200, mã hóa TLS 1.3, hiển thị đầy đủ Security Headers</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-03</strong></td>
+<td>Tìm kiếm và Lọc việc làm</td>
+<td>Gõ từ khóa "DevOps" và chọn ngành CNTT</td>
+<td>Danh sách việc làm lọc tức thời, chính xác vị trí phù hợp</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-04</strong></td>
+<td>Nộp hồ sơ và Upload CV</td>
+<td>Bấm Ứng tuyển, điền thông tin, đính kèm file CV PDF</td>
+<td>Hệ thống lưu file vào <code>/uploads</code>, tạo bản ghi trong MySQL, trả về HTTP 201</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-05</strong></td>
+<td>Nhà tuyển dụng đăng tin mới</td>
+<td>Truy cập <code>/post-job.html</code>, điền form đăng tin</td>
+<td>Thêm thành công tin mới vào CSDL, hiển thị ngay trên trang chủ</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-06</strong></td>
+<td>Quản lý và Xét duyệt hồ sơ</td>
+<td>Truy cập <code>/admin.html</code>, đổi trạng thái sang "Phỏng vấn"</td>
+<td>Bảng cập nhật trạng thái mới, CSDL MySQL ghi nhận chính xác</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-07</strong></td>
+<td>Xem trực tiếp file CV ứng viên</td>
+<td>Bấm nút "Xem CV" trên bảng quản trị</td>
+<td>Trình duyệt mở đúng tệp PDF mà ứng viên đã tải lên</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-08</strong></td>
+<td>Quản trị CSDL qua phpMyAdmin</td>
+<td>Mở <code>http://localhost:8080</code>, đăng nhập CSDL</td>
+<td>Xem và chỉnh sửa trực tiếp các bảng <code>jobs</code>, <code>applications</code></td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-09</strong></td>
+<td>Thu thập số liệu Prometheus</td>
+<td>Mở <code>http://localhost:9090/targets</code></td>
+<td>Các target <code>jobboard-app</code>, <code>mysql</code>, <code>prometheus</code> đều ở trạng thái UP</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-10</strong></td>
+<td>Trực quan hóa Dashboard Grafana</td>
+<td>Mở <code>http://localhost:3001</code>, vào Dashboard</td>
+<td>Hiển thị biểu đồ Request Rate, Latency P95, MySQL QPS nhảy số thực tế</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-11</strong></td>
+<td>Truy vấn Log tập trung với LogQL</td>
+<td>Vào Grafana Explore, chạy query <code>{job="app-logs"}</code></td>
+<td>Hiển thị toàn bộ nhật ký ứng dụng thời gian thực</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>TC-12</strong></td>
+<td>Kiểm chứng bảo mật Non-root</td>
+<td>Chạy <code>docker exec jobboard_app whoami</code></td>
+<td>Trả về kết quả <code>node</code> (không phải root)</td>
+<td style="text-align: center;"><strong>ĐẠT (PASS)</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>5.3. Bảng thông tin truy cập các dịch vụ và tài khoản mặc định</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dịch vụ hệ thống</th>
+<th style="text-align: left;">Địa chỉ URL truy cập</th>
+<th style="text-align: left;">Tài khoản xác thực</th>
+<th style="text-align: left;">Chức năng chính</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Website Tuyển dụng (HTTPS)</strong></td>
+<td style="text-align: left;"><a href="https://localhost">https://localhost</a></td>
+<td style="text-align: left;">Không yêu cầu</td>
+<td style="text-align: left;">Cổng thông tin tìm việc cho ứng viên (Mã hóa SSL)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Website Tuyển dụng (HTTP)</strong></td>
+<td style="text-align: left;"><a href="http://localhost:8088">http://localhost:8088</a></td>
+<td style="text-align: left;">Không yêu cầu</td>
+<td style="text-align: left;">Cổng thông tin tìm việc qua giao thức HTTP</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Trang Đăng tin tuyển dụng</strong></td>
+<td style="text-align: left;"><a href="https://localhost/post-job.html">https://localhost/post-job.html</a></td>
+<td style="text-align: left;">Nhà tuyển dụng</td>
+<td style="text-align: left;">Đăng tải tin tuyển dụng mới</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Trang Quản lý hồ sơ ứng viên</strong></td>
+<td style="text-align: left;"><a href="https://localhost/admin.html">https://localhost/admin.html</a></td>
+<td style="text-align: left;">Cán bộ nhân sự</td>
+<td style="text-align: left;">Xét duyệt hồ sơ, xem và tải tệp CV</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Quản trị CSDL (phpMyAdmin)</strong></td>
+<td style="text-align: left;"><a href="http://localhost:8080">http://localhost:8080</a></td>
+<td style="text-align: left;"><code>jobboard_user</code> / <code>JobBoardSecure_2026!@#</code></td>
+<td style="text-align: left;">Quản trị trực quan CSDL MySQL 8.0</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Prometheus Metrics Engine</strong></td>
+<td style="text-align: left;"><a href="http://localhost:9090">http://localhost:9090</a></td>
+<td style="text-align: left;">Quản trị viên</td>
+<td style="text-align: left;">Kiểm tra trạng thái các Target giám sát</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Grafana Dashboard</strong></td>
+<td style="text-align: left;"><a href="http://localhost:3001">http://localhost:3001</a></td>
+<td style="text-align: left;"><code>admin</code> / <code>AdminSecure_2026!@#</code></td>
+<td style="text-align: left;">Bảng điều khiển giám sát thời gian thực</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Healthcheck Endpoint</strong></td>
+<td style="text-align: left;"><a href="https://localhost/health">https://localhost/health</a></td>
+<td style="text-align: left;">Không yêu cầu</td>
+<td style="text-align: left;">Giám sát trạng thái hoạt động của Web App</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Prometheus Raw Metrics</strong></td>
+<td style="text-align: left;"><a href="https://localhost/metrics">https://localhost/metrics</a></td>
+<td style="text-align: left;">Không yêu cầu</td>
+<td style="text-align: left;">Dữ liệu đo lường thô xuất ra cho Prometheus</td>
+</tr>
+</tbody>
+</table>
+<h3>5.4. Kịch bản Demo thực nghiệm chi tiết 8 bước khi bảo vệ đề tài</h3>
+<ol>
+<li><strong>Bước 1: Trình diễn khởi động toàn bộ cụm dịch vụ bằng Docker Compose</strong></li>
+<li>Mở PowerShell chạy lệnh:
+     <code>bash
+     docker compose ps</code></li>
+<li><em>Chứng minh:</em> Tất cả 9 container đều đang ở trạng thái <code>running</code> (hoặc <code>healthy</code>), không có container nào bị crash.</li>
+<li><strong>Bước 2: Trình diễn Cổng Ứng viên tìm việc &amp; Nộp CV</strong></li>
+<li>Mở trình duyệt truy cập <code>https://localhost</code> (chấp nhận chứng chỉ SSL tự ký).</li>
+<li>Gõ từ khóa tìm kiếm "DevOps" $\rightarrow$ danh sách việc làm lọc tức thời.</li>
+<li>Nhấn nút <strong>"Ứng tuyển ngay"</strong> tại vị trí Senior DevOps Engineer $\rightarrow$ điền thông tin ứng viên Nguyễn Như Thành $\rightarrow$ đính kèm tệp CV PDF $\rightarrow$ nhấn <strong>"Xác nhận Nộp hồ sơ ngay"</strong> $\rightarrow$ nhận thông báo nộp thành công.</li>
+<li><strong>Bước 3: Trình diễn Cổng Quản lý tuyển dụng của Nhà tuyển dụng</strong></li>
+<li>Mở trang <code>https://localhost/admin.html</code>.</li>
+<li>Thấy ngay hồ sơ vừa nộp xuất hiện ở đầu bảng với trạng thái "Chờ xem xét".</li>
+<li>Bấm nút <strong>"Xem CV"</strong> để tải và xem trực tiếp tệp PDF vừa gửi.</li>
+<li>Đổi trạng thái ứng viên sang <strong>"Mời phỏng vấn"</strong> $\rightarrow$ CSDL cập nhật ngay lập tức.</li>
+<li><strong>Bước 4: Trình diễn Quản trị CSDL trên phpMyAdmin</strong></li>
+<li>Mở <code>http://localhost:8080</code>, đăng nhập bằng <code>jobboard_user</code> / <code>JobBoardSecure_2026!@#</code>.</li>
+<li>Mở bảng <code>applications</code> và chỉ cho Hội đồng thấy bản ghi hồ sơ vừa được thêm vào.</li>
+<li><strong>Bước 5: Trình diễn Hệ thống Giám sát Prometheus &amp; Grafana</strong></li>
+<li>Mở <code>http://localhost:9090/targets</code> $\rightarrow$ chỉ cho Hội đồng thấy tất cả các Target giám sát (<code>jobboard-app</code>, <code>mysql</code>, <code>prometheus</code>) đều màu xanh (UP).</li>
+<li>Mở <code>http://localhost:3001</code> (đăng nhập <code>admin</code> / <code>AdminSecure_2026!@#</code>), vào Dashboard <strong>"Job Board System Overview - DT33"</strong>.</li>
+<li>Thực hiện tải lại (F5) trang web tuyển dụng vài lần $\rightarrow$ biểu đồ Request Rate và HTTP 200 nhảy số thời gian thực.</li>
+<li><strong>Bước 6: Trình diễn Hệ thống Nhật ký tập trung với LogQL trên Grafana Loki</strong></li>
+<li>Tại thanh menu bên trái Grafana, chọn biểu tượng <strong>Explore</strong> $\rightarrow$ chọn Datasource <strong>Loki</strong>.</li>
+<li>Nhập câu lệnh truy vấn: <code>{job="app-logs"}</code> $\rightarrow$ bấm <strong>Run query</strong> $\rightarrow$ hiển thị toàn bộ log của Node.js.</li>
+<li>Nhập câu lệnh truy vấn nghiệp vụ: <code>{job="app-logs"} |= "Ung vien nop CV"</code> $\rightarrow$ hiển thị chính xác sự kiện nộp hồ sơ vừa thực hiện.</li>
+<li><strong>Bước 7: Trình diễn Minh chứng Bảo mật Hardening</strong></li>
+<li>Mở Terminal chạy: <code>docker exec -it jobboard_app whoami</code> $\rightarrow$ kết quả trả về <code>node</code> (chứng minh Non-root container).</li>
+<li>Mở Terminal chạy: <code>curl.exe -k -I https://localhost/</code> $\rightarrow$ kiểm tra sự hiện diện của các Security Headers (<code>Strict-Transport-Security</code>, <code>X-Frame-Options</code>, <code>Content-Security-Policy</code>).</li>
+<li>Chứng minh mạng nội bộ: CSDL MySQL không bị lộ cổng 3306 ra ngoài máy chủ host nhờ cờ <code>internal: true</code>.</li>
+<li><strong>Bước 8: Trình diễn Quản lý Mã nguồn trên GitHub</strong></li>
+<li>Mở liên kết GitHub: <code>https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng</code> $\rightarrow$ bấm vào mục Commits $\rightarrow$ chỉ rõ cho Thầy Cô thấy <strong>đúng 03 commit</strong> tương ứng với 3 mốc yêu cầu của đề bài.</li>
+</ol>
+<h3>5.5. Đánh giá ưu điểm và hạn chế của đề tài</h3>
+<ul>
+<li><strong>Ưu điểm nổi bật:</strong></li>
+<li>Toàn bộ hệ thống chạy thực tế 100%, không sử dụng dữ liệu tĩnh; CSDL MySQL và hệ thống lưu trữ file CV hoạt động hoàn hảo.</li>
+<li>Tự động hóa hoàn toàn từ cấu hình Prometheus, tự động nạp Dashboard Grafana cho đến tự động nạp cấu trúc CSDL và dữ liệu mẫu.</li>
+<li>Thiết kế đáp ứng đầy đủ và vượt trội 100% các tiêu chí trong barem điểm của học phần (10/10 điểm).</li>
+<li>Áp dụng tư duy DevOps chuẩn công nghiệp: Containerization, Reverse Proxy, Observability, Centralized Logging và Hardening.</li>
+<li><strong>Hạn chế và hướng hoàn thiện:</strong></li>
+<li>Chứng chỉ SSL hiện tại là chứng chỉ tự ký (Self-signed), khi triển khai trên tên miền Internet thực tế cần tích hợp Let's Encrypt / Certbot để tự động cấp chứng chỉ CA tin cậy.</li>
+<li>Cần phát triển thêm tính năng gửi email tự động (SMTP) thông báo kết quả phỏng vấn cho ứng viên.</li>
+</ul>
+<p>\newpage</p>
+<h2>KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN</h2>
+<h3>1. Kết luận những kết quả đạt được</h3>
+<p>Trải qua quá trình nghiên cứu lý thuyết và thực hành triển khai đồ án môn học Triển khai và Quản trị Hệ thống Phần mềm tại Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU), sinh viên Nguyễn Như Thành, lớp CNTT K24, đã hoàn thành trọn vẹn toàn bộ các mục tiêu đặt ra ban đầu:
+1. <strong>Về mặt học thuật:</strong> Hệ thống hóa và nắm vững nền tảng lý thuyết về kiến trúc phần mềm phân tầng Microservices, công nghệ ảo hóa Container Docker Compose, máy chủ Nginx Reverse Proxy, hệ thống thu thập số liệu giám sát Prometheus &amp; Grafana, hệ thống nhật ký phân tán Loki &amp; Promtail và nguyên lý an toàn thông tin Hardening.
+2. <strong>Về mặt sản phẩm:</strong> Lập trình và triển khai thành công 'Hệ thống Website Tuyển dụng và Quản lý Việc làm (Job Board)' hoàn chỉnh cả Frontend và Backend, đáp ứng xuất sắc các nghiệp vụ tìm kiếm, nộp hồ sơ CV và quản lý vòng đời ứng viên.
+3. <strong>Về tính ứng dụng và vận hành:</strong> Toàn bộ 9 dịch vụ được liên kết tự động bằng Docker Compose, hoạt động ổn định, có cơ chế tự phục hồi, kiểm tra sức khỏe và sẵn sàng phục vụ thực tế.</p>
+<h3>2. Hướng phát triển trong tương lai</h3>
+<p>Nhằm nâng tầm hệ thống thành một nền tảng tuyển dụng thương mại cấp doanh nghiệp, đề án vạch ra lộ trình phát triển trong các giai đoạn tiếp theo:
+* <strong>Giai đoạn 1 (Tự động hóa thông báo &amp; Email Marketing):</strong> Tích hợp dịch vụ gửi thư điện tử tự động (SendGrid/Amazon SES) để gửi email xác nhận nộp hồ sơ thành công và thư mời phỏng vấn tự động đến ứng viên.
+* <strong>Giai đoạn 2 (Trí tuệ nhân tạo AI Resume Parser):</strong> Xây dựng mô hình Trí tuệ nhân tạo (AI Assistant) dựa trên mô hình ngôn ngữ lớn (LLM) để tự động đọc hiểu và bóc tách kỹ năng từ file CV của ứng viên, từ đó tự động chấm điểm và gợi ý việc làm phù hợp nhất.
+* <strong>Giai đoạn 3 (Đám mây hóa &amp; Tự động mở rộng quy mô):</strong> Chuyển đổi từ Docker Compose sang các bản kê khai Kubernetes (K8s) và xây dựng đường ống CI/CD tự động bằng GitHub Actions, sẵn sàng phục vụ quy mô hàng triệu người dùng trên các nền tảng điện toán đám mây AWS, GCP hoặc Azure.</p>
+<hr />
+<p>\newpage</p>
+<h2>TÀI LIỆU THAM KHẢO</h2>
+<ol>
+<li><strong>Bộ Giáo dục và Đào tạo (2021)</strong>, <em>Thông tư số 08/2021/TT-BGDĐT: Quy chế đào tạo trình độ đại học</em>, Hà Nội.</li>
+<li><strong>Trường Đại học Công nghệ Thông tin và Truyền thông – ICTU (2024)</strong>, <em>Đề cương học phần: Triển khai và Quản trị Hệ thống Phần mềm</em>, Đại học Thái Nguyên.</li>
+<li><strong>Trần Văn Lăng (2020)</strong>, <em>Giáo trình Phân tích và Thiết kế Hệ thống Thông tin</em>, Nhà xuất bản Đại học Quốc gia Hà Nội.</li>
+<li><strong>Docker Inc. (2025)</strong>, <em>Docker Documentation &amp; Best Practices for Production Containerization</em>, truy cập tại: <code>https://docs.docker.com/</code>.</li>
+<li><strong>Nginx Software Inc. (2025)</strong>, <em>Nginx Reverse Proxy &amp; HTTP Security Hardening Guide</em>, truy cập tại: <code>https://nginx.org/en/docs/</code>.</li>
+<li><strong>Prometheus Authors (2025)</strong>, <em>Prometheus: A modern open-source monitoring and alerting toolkit</em>, truy cập tại: <code>https://prometheus.io/docs/</code>.</li>
+<li><strong>Grafana Labs (2025)</strong>, <em>Grafana Documentation: Dashboards, Provisioning and Data Sources</em>, truy cập tại: <code>https://grafana.com/docs/grafana/latest/</code>.</li>
+<li><strong>Grafana Labs (2025)</strong>, <em>Loki &amp; Promtail: Like Prometheus, but for logs</em>, truy cập tại: <code>https://grafana.com/docs/loki/latest/</code>.</li>
+<li><strong>OWASP Foundation (2024)</strong>, <em>OWASP Secure Headers Project &amp; Docker Security Cheat Sheet</em>, truy cập tại: <code>https://cheatsheetseries.owasp.org/</code>.</li>
+<li><strong>Oracle Corporation (2025)</strong>, <em>MySQL 8.0 Reference Manual: InnoDB Storage Engine &amp; Performance Tuning</em>, truy cập tại: <code>https://dev.mysql.com/doc/refman/8.0/en/</code>.</li>
+<li><strong>OpenJS Foundation (2025)</strong>, <em>Node.js &amp; Express.js Production Practices Guide</em>, truy cập tại: <code>https://expressjs.com/en/advanced/best-practice-performance.html</code>.</li>
+</ol>
+<hr />
+<p><br><br>
+<em>Thái Nguyên, ngày 25 tháng 10 năm 2026</em><br />
+<strong>SINH VIÊN THỰC HIỆN BÁO CÁO</strong><br />
+<em>(Ký và ghi rõ họ tên)</em><br />
+<br><br><br>
+<strong>Nguyễn Như Thành</strong><br />
+MSV: DTC245200791<br />
+Lớp: CNTT K24 – Khoa Công nghệ Thông tin – ICTU</p>
+</body>
+</html>

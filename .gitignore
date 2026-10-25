@@ -9,6 +9,8 @@ npm-debug.log*
 # Application logs & uploads
 app/logs/*.log
 app/uploads/cv-*
+app/public/BAO_CAO_*
+compile_detailed_report.py
 
 # Nginx logs
 nginx/logs/*.log

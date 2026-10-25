@@ -25,11 +25,3 @@ scrape_configs:
       - targets: ['mysqld-exporter:9104']
         labels:
           service: 'mysql-database'
-
-  # 4. Container Monitoring (cAdvisor)
-  - job_name: 'cadvisor'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['cadvisor:8080']
-        labels:
-          service: 'container-metrics'
