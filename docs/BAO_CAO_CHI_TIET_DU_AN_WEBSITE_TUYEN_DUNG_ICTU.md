@@ -43,7 +43,7 @@
 * **1. Họ và tên giảng viên hướng dẫn:** ThS. Vũ Văn Diện
 * **2. Đơn vị công tác:** Bộ môn Kỹ thuật Phần mềm, Khoa Công nghệ Thông tin, Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU) – Đại học Thái Nguyên
 * **3. Họ và tên sinh viên thực hiện:** Nguyễn Như Thành
-* **4. Lớp:** CNTT K24 — **Mã số sinh viên:** DTC245200791
+* **4. Lớp:** CNTT K23L — **Mã số sinh viên:** DTC245200791
 * **5. Tên đề tài:** Hệ thống Website Tuyển dụng và Quản lý Việc làm (Job Board) – Triển khai và Quản trị Hệ thống bằng Docker Compose, Nginx Reverse Proxy (HTTPS), Prometheus, Grafana, Loki và Hardening (Đề tài 33)
 
 ### I. NHẬN XÉT VỀ QUÁ TRÌNH THỰC HIỆN ĐỀ TÀI
