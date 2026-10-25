@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Tin Tuyển Dụng - CareerConnect</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-briefcase"></i></div>
+        CareerConnect
+      </a>
+      <ul class="nav-links">
+        <li><a href="/"><i class="fa-solid fa-compass"></i> Khám phá việc làm</a></li>
+        <li><a href="/post-job.html" class="active"><i class="fa-solid fa-plus-circle"></i> Đăng tin tuyển dụng</a></li>
+        <li><a href="/admin.html"><i class="fa-solid fa-users-gear"></i> Quản lý hồ sơ ứng viên</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="max-width: 800px;">
+    <div style="background: white; border-radius: var(--radius); border: 1px solid var(--border); padding: 2rem; box-shadow: var(--shadow);">
+      <div style="margin-bottom: 2rem; text-align: center;">
+        <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--secondary);">Đăng Tin Tuyển Dụng Mới</h1>
+        <p style="color: var(--text-muted);">Tiếp cận hàng ngàn ứng viên tiềm năng nhanh chóng</p>
+      </div>
+
+      <form id="postJobForm">
+        <div class="form-group">
+          <label for="title">Tiêu đề vị trí tuyển dụng *</label>
+          <input type="text" id="title" name="title" class="form-control" placeholder="Ví dụ: Senior DevOps Engineer, Fullstack React/Node..." required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="companyId">Doanh nghiệp tuyển dụng *</label>
+            <select id="companyId" name="company_id" class="form-control" required>
+              <option value="">-- Chọn công ty --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="categoryId">Ngành nghề / Lĩnh vực *</label>
+            <select id="categoryId" name="category_id" class="form-control" required>
+              <option value="">-- Chọn ngành nghề --</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="location">Địa điểm làm việc *</label>
+            <input type="text" id="location" name="location" class="form-control" placeholder="Hà Nội / TP.HCM / Đà Nẵng..." required>
+          </div>
+          <div class="form-group">
+            <label for="jobType">Hình thức làm việc *</label>
+            <select id="jobType" name="job_type" class="form-control" required>
+              <option value="Full-time">Full-time</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Remote">Remote</option>
+              <option value="Internship">Internship</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="salaryRange">Mức lương *</label>
+            <input type="text" id="salaryRange" name="salary_range" class="form-control" placeholder="Ví dụ: 20 - 35 triệu VNĐ, Thỏa thuận..." required>
+          </div>
+          <div class="form-group">
+            <label for="experienceLevel">Kinh nghiệm yêu cầu</label>
+            <input type="text" id="experienceLevel" name="experience_level" class="form-control" placeholder="Ví dụ: 1-2 năm, 3+ năm...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="deadline">Hạn chót nhận hồ sơ</label>
+          <input type="date" id="deadline" name="deadline" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Mô tả chi tiết công việc *</label>
+          <textarea id="description" name="description" class="form-control" style="min-height: 120px;" placeholder="Trách nhiệm chính, nhiệm vụ hàng ngày..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="requirements">Yêu cầu ứng viên *</label>
+          <textarea id="requirements" name="requirements" class="form-control" style="min-height: 120px;" placeholder="Kiến thức, kỹ năng kỹ thuật, kinh nghiệm cần có..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="benefits">Chế độ đãi ngộ & Quyền lợi</label>
+          <textarea id="benefits" name="benefits" class="form-control" style="min-height: 100px;" placeholder="Thưởng dự án, bảo hiểm, du lịch, thiết bị làm việc..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1.05rem;">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Đăng Tin Tuyển Dụng Ngay
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p><strong>Website Tuyển Dụng & Job Board (Đề tài 33)</strong> - Triển khai và Quản trị Hệ thống Phần mềm</p>
+  </footer>
+
+  <script>
+    async function loadSelectOptions() {
+      try {
+        const [compRes, catRes] = await Promise.all([
+          fetch('/api/jobs/companies').then(r => r.json()),
+          fetch('/api/jobs/categories').then(r => r.json())
+        ]);
+
+        const compSelect = document.getElementById('companyId');
+        compRes.data.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = `${c.name} (${c.location})`;
+          compSelect.appendChild(opt);
+        });
+
+        const catSelect = document.getElementById('categoryId');
+        catRes.data.forEach(cat => {
+          const opt = document.createElement('option');
+          opt.value = cat.id;
+          opt.textContent = cat.name;
+          catSelect.appendChild(opt);
+        });
+      } catch (err) {
+        console.error('Loi tai danh muc/cong ty:', err);
+      }
+    }
+
+    document.getElementById('postJobForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch('/api/jobs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          alert('Đăng tin tuyển dụng thành công!');
+          window.location.href = '/';
+        } else {
+          alert('Lỗi: ' + (data.message || 'Không thể đăng tin'));
+        }
+      } catch (err) {
+        alert('Lỗi kết nối máy chủ: ' + err.message);
+      }
+    });
+
+    loadSelectOptions();
+  </script>
+</body>
+</html>

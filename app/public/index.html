@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerConnect - Cổng Tuyển Dụng & Việc Làm Hàng Đầu</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-briefcase"></i></div>
+        CareerConnect
+      </a>
+      <ul class="nav-links">
+        <li><a href="/" class="active"><i class="fa-solid fa-compass"></i> Khám phá việc làm</a></li>
+        <li><a href="/post-job.html"><i class="fa-solid fa-plus-circle"></i> Đăng tin tuyển dụng</a></li>
+        <li><a href="/admin.html"><i class="fa-solid fa-users-gear"></i> Quản lý hồ sơ ứng viên</a></li>
+        <li><a href="/health" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-heart-pulse"></i> Healthcheck</a></li>
+        <li><a href="/metrics" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-chart-line"></i> Metrics</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Search Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Tìm Kiếm Cơ Hội Nghề Nghiệp Đột Phá</h1>
+      <p>Kết nối hàng ngàn ứng viên tài năng với các doanh nghiệp công nghệ hàng đầu</p>
+      
+      <div class="search-card">
+        <div class="search-input-group">
+          <i class="fa-solid fa-magnifying-glass" style="color: #94a3b8;"></i>
+          <input type="text" id="searchInput" placeholder="Vị trí tuyển dụng, kỹ năng, công ty...">
+        </div>
+        <div class="search-input-group">
+          <i class="fa-solid fa-location-dot" style="color: #94a3b8;"></i>
+          <input type="text" id="locationInput" placeholder="Địa điểm (Hà Nội, TP.HCM...)">
+        </div>
+        <div class="search-input-group">
+          <i class="fa-solid fa-clock" style="color: #94a3b8;"></i>
+          <select id="typeSelect">
+            <option value="">Tất cả hình thức</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Remote">Remote</option>
+            <option value="Internship">Internship</option>
+          </select>
+        </div>
+        <button id="btnSearch" class="btn btn-primary"><i class="fa-solid fa-search"></i> Tìm kiếm</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Category Filter Chips -->
+    <div class="category-strip" id="categoryChips">
+      <div class="category-chip active" data-slug=""><i class="fa-solid fa-layer-group"></i> Tất cả ngành nghề</div>
+      <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Jobs Section Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <div>
+        <h2 style="font-size: 1.4rem; font-weight: 700;">Tin Tuyển Dụng Mới Nhất</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;" id="jobResultCount">Đang tải danh sách việc làm...</p>
+      </div>
+      <a href="/post-job.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-plus"></i> Nhà tuyển dụng đăng tin</a>
+    </div>
+
+    <!-- Job Cards List -->
+    <div class="job-grid" id="jobList">
+      <!-- Rendered dynamically -->
+    </div>
+  </div>
+
+  <!-- Job Detail & Application Modal -->
+  <div class="modal-overlay" id="applyModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalJobTitle">Chi tiết việc làm & Ứng tuyển</h3>
+        <button class="close-btn" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="jobDetailContent" style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);">
+          <!-- Job details injected here -->
+        </div>
+
+        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--secondary);">
+          <i class="fa-solid fa-paper-plane" style="color: var(--primary);"></i> Nộp Hồ Sơ Ứng Tuyển
+        </h4>
+
+        <form id="applicationForm" enctype="multipart/form-data">
+          <input type="hidden" id="applyJobId" name="job_id">
+          
+          <div class="form-group">
+            <label for="fullName">Họ và tên ứng viên *</label>
+            <input type="text" id="fullName" name="full_name" class="form-control" placeholder="Nguyễn Văn A" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="email">Địa chỉ Email *</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="ungvien@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Số điện thoại *</label>
+              <input type="tel" id="phone" name="phone" class="form-control" placeholder="0987654321" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cvFile">Tải lên CV (PDF, DOC, DOCX tối đa 10MB) *</label>
+            <input type="file" id="cvFile" name="cv" class="form-control" accept=".pdf,.doc,.docx" required>
+          </div>
+
+          <div class="form-group">
+            <label for="coverLetter">Thư giới thiệu / Lời nhắn cho nhà tuyển dụng</label>
+            <textarea id="coverLetter" name="cover_letter" class="form-control" placeholder="Giới thiệu ngắn gọn kinh nghiệm, kỹ năng nổi bật của bạn..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem; font-size: 1rem;">
+            <i class="fa-solid fa-check"></i> Xác nhận Nộp hồ sơ ngay
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Website Tuyển Dụng & Job Board (Đề tài 33)</strong> - Triển khai và Quản trị Hệ thống Phần mềm</p>
+    <p style="margin-top: 0.4rem; font-size: 0.85rem;">Kiến trúc: Node.js Express + MySQL 8.0 + phpMyAdmin + Nginx Reverse Proxy (SSL) + Prometheus + Grafana + Loki</p>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

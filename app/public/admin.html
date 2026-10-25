@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Hồ Sơ Tuyển Dụng - CareerConnect Admin</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-briefcase"></i></div>
+        CareerConnect <span style="font-size: 0.8rem; background: #e0e7ff; color: #3730a3; padding: 0.2rem 0.5rem; border-radius: 4px; margin-left: 0.4rem;">Admin Portal</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/"><i class="fa-solid fa-compass"></i> Xem Website</a></li>
+        <li><a href="/post-job.html"><i class="fa-solid fa-plus-circle"></i> Đăng tin mới</a></li>
+        <li><a href="/admin.html" class="active"><i class="fa-solid fa-users-gear"></i> Hồ sơ ứng tuyển</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Stat Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+      <div style="background: white; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);">
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.35rem;">Tổng số tin tuyển dụng</p>
+        <h3 id="statTotalJobs" style="font-size: 1.8rem; font-weight: 800; color: var(--secondary);">0</h3>
+      </div>
+      <div style="background: white; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);">
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.35rem;">Tin đang mở tuyển</p>
+        <h3 id="statActiveJobs" style="font-size: 1.8rem; font-weight: 800; color: var(--primary);">0</h3>
+      </div>
+      <div style="background: white; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);">
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.35rem;">Tổng hồ sơ ứng viên</p>
+        <h3 id="statApplications" style="font-size: 1.8rem; font-weight: 800; color: var(--success);">0</h3>
+      </div>
+      <div style="background: white; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow);">
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.35rem;">Doanh nghiệp đối tác</p>
+        <h3 id="statCompanies" style="font-size: 1.8rem; font-weight: 800; color: var(--warning);">0</h3>
+      </div>
+    </div>
+
+    <!-- Filter & Search Bar for Applications -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h2 style="font-size: 1.4rem; font-weight: 700;">Danh Sách Hồ Sơ Ứng Tuyển</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Xem và cập nhật trạng thái phỏng vấn của ứng viên</p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <select id="filterStatus" class="form-control" style="width: auto;">
+          <option value="">-- Tất cả trạng thái --</option>
+          <option value="pending">Chờ xem xét</option>
+          <option value="reviewing">Đang duyệt hồ sơ</option>
+          <option value="interviewed">Mời phỏng vấn</option>
+          <option value="accepted">Trúng tuyển</option>
+          <option value="rejected">Từ chối</option>
+        </select>
+        <button id="btnRefresh" class="btn btn-outline"><i class="fa-solid fa-arrows-rotate"></i> Làm mới</button>
+      </div>
+    </div>
+
+    <!-- Applications Table -->
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Ứng viên</th>
+            <th>Vị trí ứng tuyển</th>
+            <th>Liên hệ</th>
+            <th>File CV</th>
+            <th>Ngày nộp</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody id="applicantTableBody">
+          <tr>
+            <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">Đang tải dữ liệu hồ sơ...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- System Services Quick Links (Rubric check for teacher) -->
+    <div style="margin-top: 2.5rem; background: #f1f5f9; padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--secondary);">
+        <i class="fa-solid fa-server" style="color: var(--primary);"></i> Liên kết Quản trị Hạ tầng & Giám sát Hệ thống (Đề tài 33):
+      </h3>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="http://localhost:8080" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-database"></i> phpMyAdmin (Port 8080)</a>
+        <a href="http://localhost:9090" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-fire"></i> Prometheus (Port 9090)</a>
+        <a href="http://localhost:3001" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-chart-pie"></i> Grafana Dashboard (Port 3001)</a>
+        <a href="/metrics" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-terminal"></i> Node App Metrics</a>
+        <a href="/health" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-heart-pulse"></i> Health Status</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p><strong>Website Tuyển Dụng & Job Board (Đề tài 33)</strong> - Triển khai và Quản trị Hệ thống Phần mềm</p>
+  </footer>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
