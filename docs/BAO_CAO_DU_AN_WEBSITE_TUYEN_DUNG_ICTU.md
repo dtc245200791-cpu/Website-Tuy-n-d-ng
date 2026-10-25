@@ -28,8 +28,8 @@
 
 * **Sinh viên thực hiện:** Nguyễn Như Thành
 * **Mã số sinh viên (MSV):** DTC245200791
-* **Lớp chuyên ngành:** CNTT K24
-* **Khoá học:** 2024 – 2028
+* **Lớp chuyên ngành:** CNTT K23L
+* **Khoá học:** 2023 – 2027
 * **Hệ đào tạo:** Đại học Chính quy
 * **Giảng viên hướng dẫn:** ThS. Vũ Văn Diện
 * **Bộ môn phụ trách:** Kỹ thuật Phần mềm & Mạng máy tính
@@ -46,7 +46,7 @@
 * **1. Họ và tên giảng viên hướng dẫn:** ThS. Vũ Văn Diện
 * **2. Đơn vị công tác:** Khoa Công nghệ Thông tin, Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU) – Đại học Thái Nguyên
 * **3. Họ và tên sinh viên thực hiện:** Nguyễn Như Thành
-* **4. Lớp:** CNTT K24 — **Mã số sinh viên:** DTC245200791
+* **4. Lớp:** CNTT K23L — **Mã số sinh viên:** DTC245200791
 * **5. Tên đề tài:** Hệ thống Website Tuyển dụng và Quản lý Việc làm (Job Board) – Triển khai và Quản trị Hệ thống bằng Docker Compose, Nginx Reverse Proxy (HTTPS), Prometheus, Grafana, Loki và Hardening (Đề tài 33)
 
 ### I. NHẬN XÉT VỀ QUÁ TRÌNH THỰC HIỆN ĐỀ TÀI
@@ -85,14 +85,14 @@ Lời đầu tiên, em xin được bày tỏ lòng tri ân sâu sắc và sự 
 
 Đặc biệt, em xin gửi lời cảm ơn trân trọng và chân thành nhất tới Thầy **ThS. Vũ Văn Diện** – Giảng viên hướng dẫn trực tiếp môn học. Thầy đã luôn định hướng phương pháp tiếp cận khoa học, tận tình giải đáp các vướng mắc kỹ thuật phức tạp và đưa ra những lời khuyên chuyên môn vô cùng quý báu giúp em hoàn thành đề tài này đúng tiến độ và đạt chuẩn chất lượng cao.
 
-Em cũng xin gửi lời cảm ơn chân thành đến các bạn sinh viên lớp CNTT K24 đã luôn đồng hành, chia sẻ tài liệu và cùng nhau thảo luận, kiểm thử hệ thống trong suốt thời gian thực hiện bài tập lớn.
+Em cũng xin gửi lời cảm ơn chân thành đến các bạn sinh viên lớp CNTT K23L đã luôn đồng hành, chia sẻ tài liệu và cùng nhau thảo luận, kiểm thử hệ thống trong suốt thời gian thực hiện bài tập lớn.
 
 Mặc dù bản thân em đã hết sức nỗ lực nghiên cứu, cấu hình và kiểm thử hệ thống bằng tất cả sự nghiêm túc và tâm huyết, song do kiến thức thực tế còn cần tiếp tục trau dồi, bài báo cáo khó tránh khỏi những hạn chế nhất định. Em kính mong nhận được những nhận xét, góp ý và chỉ dẫn quý báu của Quý Thầy Cô trong Hội đồng chấm đề tài để hệ thống được hoàn thiện hơn nữa.
 
 *Em xin chân thành cảm ơn!*
 
 **Sinh viên thực hiện**  
-*Lớp CNTT K24 – ICTU*  
+*Lớp CNTT K23L – ICTU*  
 **Nguyễn Như Thành**
 
 \newpage
@@ -126,7 +126,7 @@ The entire distributed ecosystem is decoupled and orchestrated via Docker Compos
 ```
 📌 TỪ KHÓA (KEYWORDS):
 Website Tuyển Dụng (Job Board), Triển khai và Quản trị Hệ thống Phần mềm, 
-Đại học CNTT & Truyền thông Thái Nguyên (ICTU), Lớp CNTT K24, Docker Compose, 
+Đại học CNTT & Truyền thông Thái Nguyên (ICTU), Lớp CNTT K23L, Docker Compose, 
 Nginx Reverse Proxy, HTTPS SSL, Prometheus, Grafana, Loki, Promtail, LogQL, 
 MySQL 8.0, phpMyAdmin, Hardening, Network Isolation, Non-root Container.
 ```
@@ -138,7 +138,7 @@ MySQL 8.0, phpMyAdmin, Hardening, Network Isolation, Non-root Container.
 | Ký hiệu / Viết tắt | Thuật ngữ Tiếng Anh | Ý nghĩa / Giải thích Tiếng Việt |
 |:---|:---|:---|
 | **ICTU** | Information and Communication Technology University | Trường Đại học Công nghệ Thông tin và Truyền thông – ĐH Thái Nguyên |
-| **CNTT K24** | Information Technology Class 24 | Lớp chuyên ngành Công nghệ Thông tin Khóa 24 tại ICTU |
+| **CNTT K23L** | Information Technology Class 24 | Lớp chuyên ngành Công nghệ Thông tin Khóa 24 tại ICTU |
 | **DevOps** | Development and Operations | Phương pháp kết hợp giữa phát triển phần mềm và vận hành hệ thống |
 | **SSL / TLS** | Secure Sockets Layer / Transport Layer Security | Giao thức mã hóa bảo mật truyền thông trên Internet |
 | **HTTPS** | Hypertext Transfer Protocol Secure | Giao thức truyền tải siêu văn bản an toàn có mã hóa SSL/TLS |
@@ -758,10 +758,10 @@ Nhằm phát triển hệ thống thành một nền tảng tuyển dụng thư�
 ---
 
 <br><br>
-*Thái Nguyên, ngày 25 tháng 10 năm 2026*  
+*Thái Nguyên, ngày 26 tháng 10 năm 2026*  
 **SINH VIÊN THỰC HIỆN BÁO CÁO**  
 *(Ký và ghi rõ họ tên)*  
 <br><br><br>
 **Nguyễn Như Thành**  
 MSV: DTC245200791  
-Lớp: CNTT K24 – Khoa Công nghệ Thông tin – ICTU
+Lớp: CNTT K23L – Khoa Công nghệ Thông tin – ICTU

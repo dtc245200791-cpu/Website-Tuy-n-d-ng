@@ -22,7 +22,7 @@
 
 * **Sinh viên thực hiện:** Nguyễn Như Thành
 * **Mã số sinh viên (MSV):** DTC245200791
-* **Lớp:** K24
+* **Lớp:** K23L
 * **Giảng viên hướng dẫn:** Bộ môn Quản trị & Mạng máy tính
 * **Repository GitHub:** [https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng](https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng)
 * **Năm học:** 2026 - 2027
