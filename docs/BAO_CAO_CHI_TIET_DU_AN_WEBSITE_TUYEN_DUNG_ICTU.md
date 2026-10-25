@@ -24,11 +24,11 @@
 
 * **Sinh viên thực hiện:** Nguyễn Như Thành
 * **Mã số sinh viên (MSV):** DTC245200791
-* **Lớp:** CNTT K24
-* **Khoá học:** 2024 – 2028 (K24)
+* **Lớp:** CNTT K23L
+* **Khoá học:** 2023 – 2027 (K23)
 * **Hệ đào tạo:** Đại học Chính quy
 * **Giảng viên hướng dẫn:** ThS. Vũ Văn Diện
-* **Giảng viên phản biện:** TS. Trần Văn Minh
+* **Giảng viên phản biện:** TS.
 * **Khoa:** Công nghệ Thông tin – ICTU
 * **Repository GitHub:** [https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng](https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng)
 
@@ -82,7 +82,7 @@ Mặc dù bản thân em đã hết sức nỗ lực nghiên cứu, phân tích 
 *Em xin chân thành cảm ơn!*
 
 **Sinh viên thực hiện**  
-*Lớp CNTT K24 – ICTU*  
+*Lớp CNTT K23L – ICTU*  
 **Nguyễn Như Thành**
 
 \newpage
@@ -102,7 +102,7 @@ The architecture adopts a decoupled microservices paradigm fully orchestrated vi
 ```
 📌 TỪ KHÓA (KEYWORDS):
 Website Tuyển Dụng (Job Board), Triển khai và Quản trị Hệ thống Phần mềm, 
-Đại học CNTT & Truyền thông Thái Nguyên (ICTU), Lớp CNTT K24, Docker Compose, 
+Đại học CNTT & Truyền thông Thái Nguyên (ICTU), Lớp CNTT K23L, Docker Compose, 
 Nginx Reverse Proxy, HTTPS SSL, Prometheus, Grafana, Loki, Promtail, LogQL, 
 MySQL 8.0, phpMyAdmin, Hardening, Network Isolation, Non-root Container.
 ```
@@ -842,10 +842,10 @@ Nhằm nâng tầm hệ thống thành một nền tảng tuyển dụng thươn
 ---
 
 <br><br>
-*Thái Nguyên, ngày 25 tháng 10 năm 2026*  
+*Thái Nguyên, ngày 26 tháng 10 năm 2026*  
 **SINH VIÊN THỰC HIỆN BÁO CÁO**  
 *(Ký và ghi rõ họ tên)*  
 <br><br><br>
 **Nguyễn Như Thành**  
 MSV: DTC245200791  
-Lớp: CNTT K24 – Khoa Công nghệ Thông tin – ICTU
+Lớp: CNTT K23L – Khoa Công nghệ Thông tin – ICTU
