@@ -2,9 +2,9 @@
 ## Môn học: Triển khai và Quản trị Hệ thống Phần mềm
 * **Sinh viên thực hiện:** Nguyễn Như Thành  
 * **Mã số sinh viên (MSV):** DTC245200791  
-* **Lớp:** CNTT K24 – Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU) – Đại học Thái Nguyên  
+* **Lớp:** CNTT K23L – Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU) – Đại học Thái Nguyên  
 * **Giảng viên hướng dẫn:** ThS. Vũ Văn Diện  
-* **Giảng viên phản biện:** TS. Trần Văn Minh  
+* **Giảng viên phản biện:** TS.  
 * **Repository GitHub:** [https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng](https://github.com/dtc245200791-cpu/Website-Tuy-n-d-ng)  
 * **Tài liệu Báo cáo chi tiết chuẩn mẫu ICTU (15+ trang):** [docs/BAO_CAO_CHI_TIET_DU_AN_WEBSITE_TUYEN_DUNG_ICTU.md](docs/BAO_CAO_CHI_TIET_DU_AN_WEBSITE_TUYEN_DUNG_ICTU.md)  
 * **Bản Word tải về (.docx):** [docs/BAO_CAO_CHI_TIET_DU_AN_WEBSITE_TUYEN_DUNG_ICTU.docx](docs/BAO_CAO_CHI_TIET_DU_AN_WEBSITE_TUYEN_DUNG_ICTU.docx)
